@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BlogPostCard from '../components/BlogPostCard.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allPosts = await getCollection('blog', ({ data }) => !data.draft);
+const latestPost = allPosts.sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())[0];
+
+const featuredProject = (await getCollection('projects')).find((p) => p.data.featured);
+---
+
+<BaseLayout title="Home">
+  <section class="py-8">
+    <h1 class="text-4xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-5xl">
+      Vasilis
+    </h1>
+    <p class="mt-4 text-xl text-gray-600 dark:text-gray-400">
+      Data Scientist. ML Engineer. Cat Person.
+    </p>
+    <p class="mt-6 max-w-prose text-gray-600 dark:text-gray-400 leading-relaxed">
+      I work at the intersection of data science, machine learning, and software engineering.
+      When I'm not training models or writing code, I'm probably reading philosophy or
+      hanging out with my cats.
+    </p>
+    <div class="mt-8 flex flex-wrap gap-3">
+      <a
+        href="/projects/"
+        class="rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-700 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300"
+      >
+        View Projects
+      </a>
+      <a
+        href="/blog/"
+        class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+      >
+        Read Blog
+      </a>
+      <a
+        href="/cv/"
+        class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+      >
+        View CV
+      </a>
+    </div>
+  </section>
+
+  {latestPost && (
+    <section class="mt-16 border-t border-gray-200 pt-12 dark:border-gray-800">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+        Latest Post
+      </h2>
+      <div class="mt-4">
+        <BlogPostCard
+          title={latestPost.data.title}
+          description={latestPost.data.description}
+          pubDate={latestPost.data.pubDate}
+          tags={latestPost.data.tags}
+          slug={latestPost.id}
+        />
+      </div>
+    </section>
+  )}
+
+  {featuredProject && (
+    <section class="mt-12 border-t border-gray-200 pt-12 dark:border-gray-800">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+        Featured Project
+      </h2>
+      <div class="mt-4">
+        <ProjectCard
+          title={featuredProject.data.title}
+          description={featuredProject.data.description}
+          category={featuredProject.data.category}
+          tech={featuredProject.data.tech}
+          slug={featuredProject.id}
+        />
+      </div>
+    </section>
+  )}
+</BaseLayout>

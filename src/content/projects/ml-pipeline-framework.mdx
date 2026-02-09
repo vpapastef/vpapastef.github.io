@@ -1,0 +1,34 @@
+---
+title: "ML Pipeline Framework"
+description: "An end-to-end machine learning pipeline framework for reproducible experiments, from data ingestion to model deployment."
+category: "data-ml"
+tech: ["Python", "PyTorch", "MLflow", "Docker", "FastAPI"]
+github: "https://github.com/vasilis/ml-pipeline"
+featured: true
+sortOrder: 10
+---
+
+## Overview
+
+A modular framework for building production-ready ML pipelines. Designed to make the journey from experimentation to deployment as smooth as possible.
+
+## Key Features
+
+- **Reproducible experiments**: Every run is tracked with MLflow, including hyperparameters, metrics, and artifacts
+- **Modular architecture**: Swap data loaders, models, and evaluation metrics without changing pipeline code
+- **Easy deployment**: Export models as Docker containers with a FastAPI serving layer
+- **Configuration-driven**: Define experiments in YAML, no code changes needed for hyperparameter sweeps
+
+## Architecture
+
+The framework follows a clean separation of concerns:
+
+```
+data_loader → preprocessor → model → evaluator → deployer
+```
+
+Each component implements a simple interface, making it easy to extend with custom implementations.
+
+## Lessons Learned
+
+Building this project taught me that the hardest part of ML isn't the models — it's everything around them. Data versioning, experiment tracking, and deployment are where most of the complexity lives.

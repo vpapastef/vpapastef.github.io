@@ -1,0 +1,100 @@
+---
+title: "A Practical Introduction to PyTorch"
+description: "A hands-on guide to getting started with PyTorch for deep learning, covering tensors, autograd, and building your first neural network."
+pubDate: 2026-02-01
+tags: ["machine-learning", "tutorial", "data-science"]
+draft: false
+---
+
+PyTorch has become the go-to framework for deep learning research and increasingly for production systems too. If you're coming from a scikit-learn background, the transition can feel daunting. Let's break it down.
+
+## Why PyTorch?
+
+- **Pythonic**: Feels like writing regular Python, not fighting a framework
+- **Dynamic computation graphs**: Debug with print statements, use standard Python control flow
+- **Ecosystem**: Hugging Face, torchvision, torchaudio, and more all build on PyTorch
+
+## Tensors: The Foundation
+
+Everything in PyTorch starts with tensors. If you know NumPy, you already know 80% of it:
+
+```python
+import torch
+
+# Creating tensors
+x = torch.tensor([1.0, 2.0, 3.0])
+y = torch.randn(3, 4)       # Random normal, shape (3, 4)
+z = torch.zeros(2, 3, 4)    # Zeros, shape (2, 3, 4)
+
+# Operations work like NumPy
+result = x @ y               # Matrix multiplication
+mean = y.mean(dim=0)         # Mean along dimension 0
+```
+
+The key difference from NumPy: tensors can live on a GPU and track gradients.
+
+```python
+# Move to GPU
+if torch.cuda.is_available():
+    x = x.cuda()
+
+# Enable gradient tracking
+x = torch.tensor([1.0, 2.0, 3.0], requires_grad=True)
+```
+
+## Autograd: Automatic Differentiation
+
+This is PyTorch's killer feature. Define your forward computation, and gradients are computed automatically:
+
+```python
+x = torch.tensor(2.0, requires_grad=True)
+y = x ** 3 + 2 * x + 1      # y = x³ + 2x + 1
+y.backward()                  # Compute dy/dx
+print(x.grad)                 # tensor(14.) = 3x² + 2 = 3(4) + 2
+```
+
+## Building a Simple Neural Network
+
+Here's a minimal example — a two-layer network for binary classification:
+
+```python
+import torch
+import torch.nn as nn
+
+class SimpleNet(nn.Module):
+    def __init__(self, input_dim, hidden_dim):
+        super().__init__()
+        self.layer1 = nn.Linear(input_dim, hidden_dim)
+        self.relu = nn.ReLU()
+        self.layer2 = nn.Linear(hidden_dim, 1)
+
+    def forward(self, x):
+        x = self.relu(self.layer1(x))
+        return self.layer2(x)
+
+# Create model, loss, and optimizer
+model = SimpleNet(input_dim=10, hidden_dim=32)
+criterion = nn.BCEWithLogitsLoss()
+optimizer = torch.optim.Adam(model.parameters(), lr=0.001)
+
+# Training loop
+for epoch in range(100):
+    optimizer.zero_grad()
+    output = model(X_train)
+    loss = criterion(output.squeeze(), y_train)
+    loss.backward()
+    optimizer.step()
+```
+
+The pattern is always the same: **forward pass → compute loss → backward pass → update weights**.
+
+## What's Next
+
+Once you're comfortable with these basics, explore:
+
+1. **Data loading** with `DataLoader` and `Dataset`
+2. **Transfer learning** with pretrained models from `torchvision`
+3. **Experiment tracking** with MLflow or Weights & Biases
+4. **Model deployment** with TorchScript or ONNX
+
+PyTorch's strength is that it stays out of your way. The more Python you know, the more productive you'll be.

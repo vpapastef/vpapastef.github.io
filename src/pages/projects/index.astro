@@ -1,0 +1,81 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import ProjectCard from '../../components/ProjectCard.astro';
+import { getCollection } from 'astro:content';
+
+const allProjects = await getCollection('projects');
+const projects = allProjects.sort((a, b) => b.data.sortOrder - a.data.sortOrder);
+
+const categories = [
+  { value: 'all', label: 'All' },
+  { value: 'data-ml', label: 'Data / ML' },
+  { value: 'software', label: 'Software' },
+];
+---
+
+<BaseLayout title="Projects" description="Selected projects in data science, machine learning, and software engineering.">
+  <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+    Projects
+  </h1>
+  <p class="mt-4 text-gray-600 dark:text-gray-400">
+    Selected projects in data science, machine learning, and software engineering.
+  </p>
+
+  <!-- Category filter -->
+  <div class="mt-6 flex gap-2" id="project-filters">
+    {categories.map((cat) => (
+      <button
+        data-category={cat.value}
+        class:list={[
+          'filter-btn rounded-full px-3 py-1 text-xs font-medium transition-colors',
+          cat.value === 'all'
+            ? 'bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900'
+            : 'bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700',
+        ]}
+      >
+        {cat.label}
+      </button>
+    ))}
+  </div>
+
+  <div class="mt-10 grid gap-4 sm:grid-cols-2" id="project-grid">
+    {projects.map((project) => (
+      <div data-category={project.data.category} class="project-item">
+        <ProjectCard
+          title={project.data.title}
+          description={project.data.description}
+          category={project.data.category}
+          tech={project.data.tech}
+          slug={project.id}
+        />
+      </div>
+    ))}
+  </div>
+</BaseLayout>
+
+<script>
+  const buttons = document.querySelectorAll('.filter-btn');
+  const items = document.querySelectorAll('.project-item');
+
+  buttons.forEach((btn) => {
+    btn.addEventListener('click', () => {
+      const category = (btn as HTMLElement).dataset.category;
+
+      // Update active button styles
+      buttons.forEach((b) => {
+        b.className = 'filter-btn rounded-full px-3 py-1 text-xs font-medium transition-colors bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700';
+      });
+      btn.className = 'filter-btn rounded-full px-3 py-1 text-xs font-medium transition-colors bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900';
+
+      // Filter projects
+      items.forEach((item) => {
+        const el = item as HTMLElement;
+        if (category === 'all' || el.dataset.category === category) {
+          el.style.display = '';
+        } else {
+          el.style.display = 'none';
+        }
+      });
+    });
+  });
+</script>

@@ -1,0 +1,29 @@
+---
+// Cat gallery with placeholder images.
+// Replace URLs with your actual cat photos in src/assets/images/cats/
+const cats = [
+  { src: 'https://placecats.com/400/300', alt: 'A cute cat' },
+  { src: 'https://placecats.com/401/300', alt: 'Another cute cat' },
+  { src: 'https://placecats.com/400/301', alt: 'Yet another cute cat' },
+  { src: 'https://placecats.com/402/300', alt: 'The cutest cat' },
+  { src: 'https://placecats.com/400/302', alt: 'Sleepy cat' },
+  { src: 'https://placecats.com/403/300', alt: 'Playful cat' },
+];
+---
+
+<div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+  {cats.map((cat) => (
+    <div class="group overflow-hidden rounded-lg">
+      <img
+        src={cat.src}
+        alt={cat.alt}
+        class="aspect-4/3 w-full object-cover transition-transform duration-300 group-hover:scale-105"
+        loading="lazy"
+      />
+    </div>
+  ))}
+</div>
+
+<p class="mt-6 text-center text-sm text-gray-500 dark:text-gray-400">
+  Replace these placeholders with photos of your actual cats!
+</p>

@@ -1,0 +1,27 @@
+---
+title: "NLP Text Classifier"
+description: "Fine-tuned transformer models for multi-label text classification with an interactive demo."
+category: "data-ml"
+tech: ["Python", "Hugging Face", "PyTorch", "Streamlit"]
+github: "https://github.com/vasilis/text-classifier"
+sortOrder: 8
+---
+
+## Overview
+
+A text classification system built on top of pretrained transformer models, fine-tuned for multi-label classification tasks. Includes a Streamlit demo for interactive testing.
+
+## Approach
+
+1. **Data preparation**: Custom dataset class with stratified splitting for multi-label data
+2. **Model selection**: Compared BERT, RoBERTa, and DistilBERT for the task
+3. **Training**: Fine-tuned with learning rate scheduling and early stopping
+4. **Evaluation**: Comprehensive metrics including per-label precision, recall, and F1
+
+## Results
+
+The fine-tuned RoBERTa model achieved a macro F1 of 0.87 on the test set, outperforming the BERT baseline by 3 points while being 40% faster at inference with DistilBERT distillation.
+
+## Demo
+
+The Streamlit app lets you input text and see real-time predictions with confidence scores for each label.

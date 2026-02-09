@@ -1,0 +1,64 @@
+---
+import BaseLayout from './BaseLayout.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  category: string;
+  tech?: string[];
+  github?: string;
+  live?: string;
+}
+
+const { title, description, category, tech = [], github, live } = Astro.props;
+---
+
+<BaseLayout title={title} description={description}>
+  <article class="prose prose-gray dark:prose-invert mx-auto max-w-none">
+    <header class="mb-8 not-prose">
+      <div class="mb-2">
+        <span class="inline-block rounded-full bg-gray-100 px-3 py-1 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">
+          {category === 'data-ml' ? 'Data / ML' : 'Software'}
+        </span>
+      </div>
+      <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+        {title}
+      </h1>
+      <p class="mt-2 text-lg text-gray-600 dark:text-gray-400">{description}</p>
+
+      {tech.length > 0 && (
+        <div class="mt-4 flex flex-wrap gap-2">
+          {tech.map((t) => (
+            <span class="rounded-md bg-blue-50 px-2 py-1 text-xs font-medium text-blue-700 dark:bg-blue-900/30 dark:text-blue-300">
+              {t}
+            </span>
+          ))}
+        </div>
+      )}
+
+      <div class="mt-4 flex gap-3">
+        {github && (
+          <a
+            href={github}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 rounded-md bg-gray-900 px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-gray-700 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300"
+          >
+            GitHub
+          </a>
+        )}
+        {live && (
+          <a
+            href={live}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="inline-flex items-center gap-1.5 rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+          >
+            Live Demo
+          </a>
+        )}
+      </div>
+    </header>
+    <slot />
+  </article>
+</BaseLayout>

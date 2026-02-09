@@ -1,0 +1,33 @@
+---
+title: "CLI Task Manager"
+description: "A fast, minimal command-line task manager written in Python with SQLite persistence."
+category: "software"
+tech: ["Python", "SQLite", "Click", "Rich"]
+github: "https://github.com/vasilis/task-cli"
+sortOrder: 4
+---
+
+## Overview
+
+A terminal-based task manager for developers who live in the command line. Fast startup, beautiful output with Rich, and SQLite for persistence.
+
+## Usage
+
+```bash
+task add "Write blog post about probability"
+task list
+task done 1
+task tag 2 ml urgent
+task list --tag ml
+```
+
+## Design Philosophy
+
+- **Fast**: SQLite means no server, no network calls. Startup in milliseconds.
+- **Minimal**: Do one thing well. No Gantt charts, no team features, no cloud sync.
+- **Beautiful**: Rich library for colored output, tables, and progress bars.
+- **Scriptable**: JSON output mode for piping into other tools.
+
+## What I Learned
+
+This project was an exercise in restraint. The temptation to add features is strong, but the best CLI tools are the ones that do one thing exceptionally well.

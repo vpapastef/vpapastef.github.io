@@ -1,0 +1,131 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="CV" description="Curriculum Vitae of Vasilis — education, experience, and skills.">
+  <div class="flex items-center justify-between">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+      CV
+    </h1>
+    <a
+      href="/resume.pdf"
+      target="_blank"
+      class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+    >
+      Download PDF
+    </a>
+  </div>
+
+  <div class="mt-10 space-y-12">
+    <!-- Experience -->
+    <section>
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+        Experience
+      </h2>
+      <div class="mt-4 space-y-8">
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">Data Scientist / ML Engineer</h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2023 — Present</span>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400">Company Name</p>
+          <ul class="mt-2 space-y-1 text-sm text-gray-600 dark:text-gray-400">
+            <li>Built and deployed machine learning models for production use cases</li>
+            <li>Developed data pipelines and ETL processes</li>
+            <li>Conducted statistical analyses and A/B testing</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">Junior Data Scientist</h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2021 — 2023</span>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400">Previous Company</p>
+          <ul class="mt-2 space-y-1 text-sm text-gray-600 dark:text-gray-400">
+            <li>Performed exploratory data analysis on large datasets</li>
+            <li>Implemented predictive models using scikit-learn and PyTorch</li>
+            <li>Created dashboards and visualizations for stakeholders</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section>
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+        Education
+      </h2>
+      <div class="mt-4 space-y-6">
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">M.Sc. in Data Science</h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2019 — 2021</span>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400">University Name</p>
+        </div>
+
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">B.Sc. in Computer Science</h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2015 — 2019</span>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400">University Name</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Skills -->
+    <section>
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+        Skills
+      </h2>
+      <div class="mt-4 space-y-4">
+        <div>
+          <h3 class="text-sm font-medium text-gray-900 dark:text-gray-100">Languages</h3>
+          <div class="mt-2 flex flex-wrap gap-2">
+            {['Python', 'SQL', 'R', 'Bash', 'JavaScript'].map((skill) => (
+              <span class="rounded-md bg-gray-100 px-3 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-gray-900 dark:text-gray-100">ML / Data Science</h3>
+          <div class="mt-2 flex flex-wrap gap-2">
+            {['PyTorch', 'scikit-learn', 'pandas', 'NumPy', 'TensorFlow', 'Hugging Face', 'MLflow'].map((skill) => (
+              <span class="rounded-md bg-gray-100 px-3 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+
+        <div>
+          <h3 class="text-sm font-medium text-gray-900 dark:text-gray-100">Tools & Infrastructure</h3>
+          <div class="mt-2 flex flex-wrap gap-2">
+            {['Git', 'Docker', 'Linux', 'PostgreSQL', 'AWS', 'GitHub Actions'].map((skill) => (
+              <span class="rounded-md bg-gray-100 px-3 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">
+                {skill}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Publications -->
+    <section>
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+        Publications
+      </h2>
+      <div class="mt-4 space-y-4">
+        <p class="text-sm text-gray-500 dark:text-gray-400 italic">
+          Add your publications here.
+        </p>
+      </div>
+    </section>
+  </div>
+</BaseLayout>

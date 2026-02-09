@@ -1,0 +1,63 @@
+---
+title: "The Philosophy of Probability in ML"
+description: "Exploring the Bayesian vs frequentist debate through the lens of epistemology, and what it means for how we build machine learning systems."
+pubDate: 2026-02-15
+tags: ["philosophy", "machine-learning"]
+draft: false
+---
+
+What does it mean for a model to be "confident"? When your classifier outputs 0.95 for a particular class, what exactly is that number telling you?
+
+These questions sit at the intersection of machine learning and philosophy — specifically, epistemology and the philosophy of probability. And the answers you give shape how you build, evaluate, and deploy ML systems.
+
+## Two Schools of Thought
+
+The debate between **Bayesian** and **frequentist** interpretations of probability has been going on for centuries, but it's more relevant than ever in the age of machine learning.
+
+### The Frequentist View
+
+For a frequentist, probability is about **long-run frequencies**. The probability of an event is the proportion of times it would occur if you repeated the experiment infinitely many times. Under this view:
+
+- Model parameters are fixed (but unknown) quantities
+- Confidence intervals have a specific procedural interpretation
+- p-values measure the probability of data given a hypothesis
+
+### The Bayesian View
+
+For a Bayesian, probability represents **degrees of belief**. It's a measure of uncertainty that can be updated as new evidence arrives. Under this view:
+
+- Model parameters are random variables with distributions
+- Prior beliefs are explicitly encoded and updated via Bayes' theorem
+- Posterior distributions tell you what you should believe after seeing data
+
+## What This Means in Practice
+
+Consider a simple example. You're building a model to predict whether a customer will churn. A frequentist approach might give you a point estimate:
+
+$$P(\text{churn} \mid \mathbf{x}) = 0.73$$
+
+A Bayesian approach gives you a full distribution over that probability, capturing your **uncertainty about the uncertainty**:
+
+$$P(\text{churn} \mid \mathbf{x}) \sim \text{Beta}(7.3, 2.7)$$
+
+This distinction matters enormously in high-stakes decisions. When you're deciding whether to intervene with a customer, knowing that your estimate could plausibly be anywhere from 0.5 to 0.9 is very different from a confident point estimate of 0.73.
+
+## The Pragmatic Middle Ground
+
+In practice, most ML practitioners adopt a pragmatic approach. We use:
+
+- **Frequentist tools** like cross-validation and hypothesis testing for model selection
+- **Bayesian thinking** for uncertainty quantification and decision-making
+- **Information-theoretic** perspectives for understanding model capacity and generalization
+
+The key insight is that these aren't just technical choices — they reflect deep philosophical commitments about the nature of knowledge and uncertainty.
+
+## Further Reading
+
+If this topic interests you, I'd recommend:
+
+- Jaynes, E.T. — *Probability Theory: The Logic of Science*
+- Hacking, I. — *An Introduction to Probability and Inductive Logic*
+- Gelman, A. et al. — *Bayesian Data Analysis*
+
+The philosophy of probability isn't just an academic exercise. It shapes the tools we build, the decisions we make, and ultimately, how we understand the world through data.

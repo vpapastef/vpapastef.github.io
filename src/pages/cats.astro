@@ -1,0 +1,17 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CatGallery from '../components/CatGallery.astro';
+---
+
+<BaseLayout title="Cats" description="A gallery of my beloved cats.">
+  <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+    Cats
+  </h1>
+  <p class="mt-4 text-gray-600 dark:text-gray-400">
+    Because every good personal website needs a cat gallery.
+  </p>
+
+  <div class="mt-8">
+    <CatGallery />
+  </div>
+</BaseLayout>
