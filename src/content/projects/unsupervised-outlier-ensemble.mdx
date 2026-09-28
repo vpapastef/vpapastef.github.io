@@ -1,0 +1,17 @@
+---
+title: "Unsupervised Outlier Detection: A Meta-Learning Algorithm Based on Feature Selection"
+description: "A meta-learning algorithm that runs unsupervised feature selection upstream of PyOD detectors and learns to combine them, producing a more stable ensemble that's less sensitive to noisy or irrelevant features."
+category: "data-ml"
+tech: ["Python", "PyOD", "scikit-learn", "NumPy", "pandas"]
+github: "https://github.com/ML-Upatras/unsupervised-outlier-detection"
+paper: "https://doi.org/10.3390/electronics10182236"
+venue: "Electronics"
+year: 2021
+sortOrder: 70
+---
+
+## Overview
+
+Off-the-shelf anomaly detectors are sensitive to noisy or irrelevant features — a weakness that compounds in unsupervised settings, where you cannot tune to a label. This paper proposes a meta-learning algorithm that runs unsupervised feature selection upstream of standard PyOD detectors, then learns to aggregate their outputs into a more stable ensemble.
+
+The repository ships a reproducible benchmark (`benchmarking.py`) whose results are formatted for the [STAC web platform](https://tec.citius.usc.es/stac/) so a Friedman test can rank methods across datasets.

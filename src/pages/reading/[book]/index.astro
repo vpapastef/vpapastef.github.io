@@ -1,0 +1,118 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { bookSlugOf, entrySlugOf, previewOf, isShort, byline, formatDate, chapterNumOf, firstPageOf } from '../../../lib/reading';
+
+export async function getStaticPaths() {
+  const books = await getCollection('books', ({ data }) => !data.draft);
+  return books.map((book) => ({ params: { book: book.id }, props: { book } }));
+}
+
+const { book } = Astro.props;
+
+const notes = (await getCollection('notes', ({ data }) => !data.draft))
+  .filter((n) => bookSlugOf(n) === book.id)
+  .sort((a, b) =>
+    a.data.date.valueOf() - b.data.date.valueOf()
+    || chapterNumOf(a) - chapterNumOf(b)
+    || firstPageOf(a) - firstPageOf(b)
+    || (a.data.order ?? Number.MAX_SAFE_INTEGER) - (b.data.order ?? Number.MAX_SAFE_INTEGER));
+
+const meta = [
+  byline(book.data.authors),
+  book.data.publisher,
+  book.data.year?.toString(),
+].filter(Boolean).join(' · ');
+---
+
+<BaseLayout
+  title={book.data.title}
+  description={`Reading notes on ${book.data.title} by ${byline(book.data.authors)}.`}
+>
+  <a href="/reading/" class="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+    ← Reading
+  </a>
+
+  <header class="mt-4 border-b border-gray-200 pb-6 dark:border-gray-800">
+    <div class="flex flex-col gap-2 sm:flex-row sm:items-start sm:justify-between">
+      <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
+        {book.data.title}
+      </h1>
+      <span
+        class:list={[
+          'mt-1 shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium',
+          book.data.status === 'reading'
+            ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300'
+            : 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400',
+        ]}
+      >
+        {book.data.status === 'reading' ? 'Reading' : 'Finished'}
+      </span>
+    </div>
+
+    {book.data.subtitle && (
+      <p class="mt-1 text-lg italic text-gray-500 dark:text-gray-400">{book.data.subtitle}</p>
+    )}
+
+    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">{meta}</p>
+
+    {book.data.link && (
+      <a
+        href={book.data.link}
+        target="_blank"
+        rel="noopener noreferrer"
+        class="mt-2 inline-block text-sm underline hover:text-accent dark:hover:text-accent-dark"
+      >
+        Publisher page
+      </a>
+    )}
+  </header>
+
+  {notes.length === 0 ? (
+    <p class="mt-10 text-gray-600 dark:text-gray-400">No notes yet.</p>
+  ) : (
+    <ol class="mt-8 space-y-8">
+      {notes.map((note) => (
+        <li class="border-b border-gray-100 pb-8 last:border-0 dark:border-gray-900">
+          <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+            <h2 class="font-semibold text-gray-900 dark:text-gray-100">
+              <a
+                href={`/reading/${book.id}/${entrySlugOf(note)}/`}
+                class="hover:text-accent dark:hover:text-accent-dark"
+              >
+                {note.data.title}
+              </a>
+            </h2>
+            <time
+              datetime={note.data.date.toISOString()}
+              class="shrink-0 text-sm text-gray-500 dark:text-gray-400"
+            >
+              {formatDate(note.data.date)}
+            </time>
+          </div>
+
+          {(note.data.chapter || note.data.pages) && (
+            <p class="mt-1 text-xs text-gray-500 dark:text-gray-500">
+              {[note.data.chapter, note.data.pages && `pp. ${note.data.pages}`]
+                .filter(Boolean)
+                .join(' · ')}
+            </p>
+          )}
+
+          <p class="mt-2 text-gray-600 dark:text-gray-400 leading-relaxed">
+            {previewOf(note)}
+          </p>
+
+          {!isShort(note) && (
+            <a
+              href={`/reading/${book.id}/${entrySlugOf(note)}/`}
+              class="mt-2 inline-block text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+            >
+              Read the whole entry →
+            </a>
+          )}
+        </li>
+      ))}
+    </ol>
+  )}
+</BaseLayout>

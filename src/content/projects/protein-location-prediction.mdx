@@ -1,0 +1,15 @@
+---
+title: "Subcellular Protein Location Prediction"
+description: "Bioinformatics mini-project: classifying eukaryotic proteins by subcellular location (cytoplasm, mitochondrion, nucleus, secreted) from sequence-derived features."
+category: "data-ml"
+tech: ["Python", "scikit-learn", "XGBoost", "Biopython"]
+github: "https://github.com/vpapastef/msc_ProteinLocationPrediction"
+sortOrder: 6
+year: 2018
+---
+
+## Overview
+
+A multi-class classifier that predicts where in the eukaryotic cell a protein operates — cytoplasm, mitochondrion, nucleus, or secreted — from features extracted from its amino-acid sequence: amino-acid composition, isoelectric point, and other physico-chemical descriptors via Biopython.
+
+Compares ensemble methods (random forests, XGBoost) under stratified cross-validation, with predictions on a blind FASTA test set held out from training.

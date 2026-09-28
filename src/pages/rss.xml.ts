@@ -1,20 +1,21 @@
 import rss from '@astrojs/rss';
 import { getCollection } from 'astro:content';
 import type { APIContext } from 'astro';
+import { bookSlugOf, entrySlugOf, previewOf } from '../lib/reading';
 
 export async function GET(context: APIContext) {
-  const posts = await getCollection('blog', ({ data }) => !data.draft);
+  const notes = await getCollection('notes', ({ data }) => !data.draft);
   return rss({
-    title: "Vasilis' Blog",
-    description: 'Thoughts on data science, machine learning, philosophy, and more.',
+    title: 'Vasilis Papastefanopoulos — Reading diary',
+    description: 'Notes on books, kept as I read them.',
     site: context.site!,
-    items: posts
-      .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
-      .map((post) => ({
-        title: post.data.title,
-        description: post.data.description,
-        pubDate: post.data.pubDate,
-        link: `/blog/${post.id}/`,
+    items: notes
+      .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+      .map((note) => ({
+        title: note.data.title,
+        description: previewOf(note),
+        pubDate: note.data.date,
+        link: `/reading/${bookSlugOf(note)}/${entrySlugOf(note)}/`,
       })),
   });
 }

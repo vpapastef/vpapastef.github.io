@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://mrglglglglgl.github.io/sitemap-index.xml
+Sitemap: https://vpapastef.github.io/sitemap-index.xml

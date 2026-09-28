@@ -21,7 +21,6 @@ const categories = [
     Selected projects in data science, machine learning, and software engineering.
   </p>
 
-  <!-- Category filter -->
   <div class="mt-6 flex gap-2" id="project-filters">
     {categories.map((cat) => (
       <button
@@ -47,6 +46,7 @@ const categories = [
           category={project.data.category}
           tech={project.data.tech}
           slug={project.id}
+          year={project.data.year}
         />
       </div>
     ))}
@@ -61,13 +61,11 @@ const categories = [
     btn.addEventListener('click', () => {
       const category = (btn as HTMLElement).dataset.category;
 
-      // Update active button styles
       buttons.forEach((b) => {
         b.className = 'filter-btn rounded-full px-3 py-1 text-xs font-medium transition-colors bg-gray-100 text-gray-600 hover:bg-gray-200 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700';
       });
       btn.className = 'filter-btn rounded-full px-3 py-1 text-xs font-medium transition-colors bg-gray-900 text-white dark:bg-gray-100 dark:text-gray-900';
 
-      // Filter projects
       items.forEach((item) => {
         const el = item as HTMLElement;
         if (category === 'all' || el.dataset.category === category) {

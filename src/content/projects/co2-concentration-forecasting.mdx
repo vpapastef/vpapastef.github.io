@@ -1,0 +1,18 @@
+---
+title: "CO₂ Concentration Forecasting in Smart Cities with a Hybrid ARIMA–TFT Model"
+description: "Hybrid statistical–deep forecasting for indoor CO₂ in smart cities — pairing ARIMA with the Temporal Fusion Transformer over multivariate IoT sensor streams."
+category: "data-ml"
+tech: ["Python", "darts", "PyTorch", "TFT", "ARIMA"]
+github: "https://github.com/ML-Upatras/co2-concentration-forecasting"
+paper: "https://doi.org/10.1038/s41598-023-42346-0"
+venue: "Scientific Reports"
+year: 2023
+featured: true
+sortOrder: 80
+---
+
+## Overview
+
+Indoor CO₂ time series mix smooth diurnal trends with sharp event-driven spikes — a regime where neither classical statistical methods nor pure neural sequence models cleanly dominate. This paper proposes a hybrid that pairs ARIMA with the Temporal Fusion Transformer (TFT), letting each component handle the part of the signal it captures best.
+
+The companion repository, built on `darts`, runs a head-to-head comparison against a wide baseline panel: NaiveSeasonal, ARIMA, Exponential Smoothing, Theta, FFT, RNN, BlockRNN, TCN, NBEATS, Transformer, and TFT — all reproducible from a single configuration file.

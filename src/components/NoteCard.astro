@@ -1,0 +1,38 @@
+---
+import TagList from './TagList.astro';
+
+interface Props {
+  title: string;
+  preview: string;
+  date: Date;
+  href: string;
+  tags?: string[];
+  context?: string;
+}
+
+const { title, preview, date, href, tags = [], context } = Astro.props;
+
+function formatDate(d: Date): string {
+  return d.toLocaleDateString('en-US', { year: 'numeric', month: 'short', day: 'numeric' });
+}
+---
+
+<article class="group">
+  <a href={href} class="block">
+    <div class="flex flex-wrap items-baseline gap-x-2 text-sm text-gray-500 dark:text-gray-400">
+      <time datetime={date.toISOString()}>{formatDate(date)}</time>
+      {context && <span>· {context}</span>}
+    </div>
+    <h3 class="mt-1 text-lg font-semibold text-gray-900 group-hover:text-accent dark:text-gray-100 dark:group-hover:text-accent-dark">
+      {title}
+    </h3>
+    <p class="mt-1 text-sm text-gray-600 dark:text-gray-400 line-clamp-2">
+      {preview}
+    </p>
+  </a>
+  {tags.length > 0 && (
+    <div class="mt-2">
+      <TagList tags={tags} />
+    </div>
+  )}
+</article>

@@ -1,0 +1,18 @@
+---
+title: "Combining Normalizing Flows with Decision Trees for Interpretable Outlier Detection"
+description: "A hybrid model that pairs normalizing flows with decision trees, yielding an unsupervised outlier detector that is both accurate and inherently explainable."
+category: "data-ml"
+tech: ["Python", "PyOD", "TensorFlow", "PyTorch", "TensorFlow Probability"]
+github: "https://github.com/ML-Upatras/interpretable-outlier-detection"
+paper: "https://doi.org/10.1016/j.engappai.2024.109770"
+venue: "Engineering Applications of Artificial Intelligence"
+year: 2025
+featured: true
+sortOrder: 100
+---
+
+## Overview
+
+Normalizing flows learn flexible density estimates that are well-suited to anomaly scoring, but the resulting decision surface is opaque. Decision trees are interpretable but inflexible. This paper combines the two — yielding an unsupervised outlier detector that is both accurate and inherently explainable.
+
+The companion repository ships an end-to-end benchmarking pipeline (`main.py`) and a Friedman significance test harness (`friedman.py`) for ranking the methods evaluated in the paper.

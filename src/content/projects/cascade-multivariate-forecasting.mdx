@@ -1,0 +1,18 @@
+---
+title: "Regressor Cascading for Time-Series Forecasting"
+description: "A cascade architecture that chains regressors so each stage refines the previous one's predictions, evaluated across thirteen real-world IoT, energy, and transportation datasets."
+category: "data-ml"
+tech: ["Python", "scikit-learn", "pandas", "NumPy"]
+github: "https://github.com/ML-Upatras/cascade-multivariate-paper"
+paper: "https://doi.org/10.3233/IDT-240224"
+venue: "Intelligent Decision Technologies"
+year: 2024
+featured: true
+sortOrder: 90
+---
+
+## Overview
+
+A cascade architecture for time-series forecasting: regressors are chained in a sequence, each stage taking the output of the previous one as additional input, so the cascade can learn corrective adjustments that any single model would miss.
+
+The paper evaluates the approach across thirteen real-world datasets — air quality, traffic, energy demand, power consumption, parking occupancy, room occupancy, solar generation, wind turbines, electricity load, and various IoT sensor streams — and the repository ships a fully reproducible pipeline: per-dataset preprocessing (`gen_data.py`), training over configurable lookback windows and forecast horizons (`training_pipeline.py`), and a batch script (`gen_data.sh`) that recreates the paper's preprocessing settings end to end.

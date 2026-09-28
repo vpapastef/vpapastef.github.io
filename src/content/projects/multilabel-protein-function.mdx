@@ -1,0 +1,23 @@
+---
+title: "Multi-Label Protein Function Prediction"
+description: "MSc project: a ranking-based loss function for deep multi-label classifiers, applied to protein function prediction from sequence-derived features."
+category: "data-ml"
+tech: ["Python", "PyTorch", "Deep Learning"]
+github: "https://github.com/vpapastef/msc_MultilabelProteinFunctionPrediction"
+featured: false
+sortOrder: 10
+year: 2018
+---
+
+## Overview
+
+Protein function prediction is a multi-label problem — a single protein typically participates in many biological processes at once. Standard losses treat labels independently and miss the ranking structure that matters for downstream biological interpretation.
+
+This MSc project develops a ranking-style cost function and pairs it with a configurable multi-layer perceptron, trained across hyperparameter sweeps in PyTorch.
+
+## Repository structure
+
+- `custom_modules/custom_loss.py` — the ranking-based loss
+- `custom_modules/custom_mlp.py` — configurable MLP with batch normalisation and dropout
+- `training_parallelization/` — multi-run training harness
+- `holdout_set_evaluation/`, `test_set_evaluation/` — evaluation pipelines

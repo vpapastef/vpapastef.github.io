@@ -2,129 +2,385 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 ---
 
-<BaseLayout title="CV" description="Curriculum Vitae of Vasilis — education, experience, and skills.">
-  <div class="flex items-center justify-between">
-    <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
-      CV
-    </h1>
-    <a
-      href="/resume.pdf"
-      target="_blank"
-      class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
-    >
-      Download PDF
-    </a>
-  </div>
+<BaseLayout title="CV" description="Curriculum Vitae of Vasilis Papastefanopoulos.">
+  <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+    CV
+  </h1>
 
-  <div class="mt-10 space-y-12">
-    <!-- Experience -->
-    <section>
+  <nav aria-label="CV sections" class="mt-4 flex flex-wrap gap-x-3 gap-y-1 text-sm text-gray-500 dark:text-gray-400">
+    <a href="#experience" class="hover:text-accent dark:hover:text-accent-dark">Experience</a><span>·</span>
+    <a href="#education" class="hover:text-accent dark:hover:text-accent-dark">Education</a><span>·</span>
+    <a href="#teaching" class="hover:text-accent dark:hover:text-accent-dark">Teaching</a><span>·</span>
+    <a href="#books" class="hover:text-accent dark:hover:text-accent-dark">Books</a><span>·</span>
+    <a href="#publications" class="hover:text-accent dark:hover:text-accent-dark">Publications</a><span>·</span>
+    <a href="#awards" class="hover:text-accent dark:hover:text-accent-dark">Awards</a><span>·</span>
+    <a href="#service" class="hover:text-accent dark:hover:text-accent-dark">Service</a><span>·</span>
+    <a href="#open-source" class="hover:text-accent dark:hover:text-accent-dark">Open Source</a>
+  </nav>
+
+  <div class="mt-10 space-y-12 text-pretty">
+    <section id="experience" class="scroll-mt-8">
       <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
         Experience
       </h2>
       <div class="mt-4 space-y-8">
+
         <div>
           <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
-            <h3 class="font-semibold text-gray-900 dark:text-gray-100">Data Scientist / ML Engineer</h3>
-            <span class="text-sm text-gray-500 dark:text-gray-400">2023 — Present</span>
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">
+              <a href="https://www.pepcogroup.eu/" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark">Pepco Group</a>
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2024-Present</span>
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400">Company Name</p>
-          <ul class="mt-2 space-y-1 text-sm text-gray-600 dark:text-gray-400">
-            <li>Built and deployed machine learning models for production use cases</li>
-            <li>Developed data pipelines and ETL processes</li>
-            <li>Conducted statistical analyses and A/B testing</li>
+          <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-400 marker:text-gray-300 dark:marker:text-gray-600">
+            <li>Machine learning engineering and applied R&amp;D for large-scale retail data: predictive modelling and downstream analysis.</li>
+            <li>Data engineering: automated data collection and processing pipelines.</li>
+            <li>A/B testing and causal-inference research: experimentation design, control groups, synthetic controls, and statistical analysis.</li>
           </ul>
         </div>
 
         <div>
           <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
-            <h3 class="font-semibold text-gray-900 dark:text-gray-100">Junior Data Scientist</h3>
-            <span class="text-sm text-gray-500 dark:text-gray-400">2021 — 2023</span>
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">
+              <a href="https://datasimply.co/" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark">Data Simply</a>
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2024</span>
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400">Previous Company</p>
-          <ul class="mt-2 space-y-1 text-sm text-gray-600 dark:text-gray-400">
-            <li>Performed exploratory data analysis on large datasets</li>
-            <li>Implemented predictive models using scikit-learn and PyTorch</li>
-            <li>Created dashboards and visualizations for stakeholders</li>
+          <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-400 marker:text-gray-300 dark:marker:text-gray-600">
+            <li>Contributor to <a href="https://openretailscience.datasimply.co/" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">OpenRetailScience</a>, an open-source Python library for retail data analysis: segmentation methods, statistical analysis, and visualisation.</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">
+              <a href="https://p.ai/" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark">P.ai</a>
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2018-2024</span>
+          </div>
+          <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-400 marker:text-gray-300 dark:marker:text-gray-600">
+            <li>Predictive ML models for customer behavior (acquisition, retention, and lifetime value) and audience segmentation, over integrated first-party data.</li>
+            <li>Multi-cell holdout experiment design and statistical analysis to measure model incrementality and lift.</li>
+            <li>An image-to-video pipeline that turned top-performing static ads into short-form videos, combining large language models with a from-scratch PatchMatch implementation (the algorithm behind Adobe's Content-Aware Fill) for image extension to target video dimensions.</li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">
+              <a href="https://www.crick.ac.uk/" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark">The Francis Crick Institute</a>
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">Summer 2018</span>
+          </div>
+          <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-400 marker:text-gray-300 dark:marker:text-gray-600">
+            <li>Multi-label deep neural networks with learning-to-rank cost functions for protein function prediction.</li>
+            <li>Biomedical Data Science Laboratory, under <a href="https://profiles.ucl.ac.uk/8364-david-jones" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">Prof. David Jones</a> (Head of the <a href="https://www.ucl.ac.uk/engineering/computer-science/research/research-groups-and-centres/bioinformatics-group" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">UCL Bioinformatics Group</a>).</li>
           </ul>
         </div>
       </div>
     </section>
 
-    <!-- Education -->
-    <section>
+    <section id="education" class="scroll-mt-8">
       <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
         Education
       </h2>
       <div class="mt-4 space-y-6">
         <div>
           <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
-            <h3 class="font-semibold text-gray-900 dark:text-gray-100">M.Sc. in Data Science</h3>
-            <span class="text-sm text-gray-500 dark:text-gray-400">2019 — 2021</span>
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">
+              <a href="https://www.math.upatras.gr/phd-studies" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark">Ph.D. in Machine Learning</a>
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2020-2025</span>
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400">University Name</p>
+          <p class="text-sm text-gray-600 dark:text-gray-400 italic">University of Patras</p>
+          <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-400 marker:text-gray-300 dark:marker:text-gray-600">
+            <li>Thesis: <a href="https://www.didaktorika.gr/eadd/handle/10442/59692" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">Unsupervised Outlier Detection: New Approaches for Robust Ensembles and Interpretability</a></li>
+            <li>Supervisor: <a href="https://www.math.upatras.gr/?section=2174&amp;language=en_US&amp;itemid2354=2720&amp;detail2354=1" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">Prof. Sotiris Kotsiantis</a></li>
+          </ul>
         </div>
 
         <div>
           <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
-            <h3 class="font-semibold text-gray-900 dark:text-gray-100">B.Sc. in Computer Science</h3>
-            <span class="text-sm text-gray-500 dark:text-gray-400">2015 — 2019</span>
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">
+              <a href="https://www.ucl.ac.uk/prospective-students/graduate/taught/degrees/machine-learning-msc" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark">M.Sc. in Machine Learning</a>
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2017-2018</span>
           </div>
-          <p class="text-sm text-gray-600 dark:text-gray-400">University Name</p>
+          <p class="text-sm text-gray-600 dark:text-gray-400 italic">University College London, Distinction</p>
+          <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-400 marker:text-gray-300 dark:marker:text-gray-600">
+            <li>Thesis: <a href="/projects/multilabel-protein-function/" class="underline hover:text-accent dark:hover:text-accent-dark">Developing a ranking cost function for better multi-label protein function prediction using deep&nbsp;learning</a></li>
+            <li>Supervisor: <a href="https://profiles.ucl.ac.uk/8364-david-jones" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">Prof. David Jones</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">
+              <a href="https://www.math.upatras.gr/undergraduate-programs" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark">B.Sc. in Mathematics</a>
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2014-2017</span>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 italic">University of Patras, 1st</p>
+          <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-400 marker:text-gray-300 dark:marker:text-gray-600">
+            <li>Thesis: <a href="https://nemertes.library.upatras.gr/items/ac68ca01-be50-4525-b808-e34593886e3f" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">Credit Scoring Using Machine Learning</a></li>
+            <li>Supervisor: <a href="https://www.math.upatras.gr/?section=2174&amp;language=en_US&amp;itemid2354=2720&amp;detail2354=1" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">Prof. Sotiris Kotsiantis</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">
+              <a href="https://www.edu-sw.upatras.gr/en/undergraduate-studies/" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark">B.A. in Education</a>
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2008-2012</span>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 italic">University of Patras, 2:1</p>
+          <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-400 marker:text-gray-300 dark:marker:text-gray-600">
+            <li>Interdisciplinary studies in psychology, sociology, history, and philosophy of education.</li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- Skills -->
-    <section>
+    <section id="teaching" class="scroll-mt-8">
       <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
-        Skills
+        Teaching
       </h2>
-      <div class="mt-4 space-y-4">
+      <div class="mt-4 space-y-6">
         <div>
-          <h3 class="text-sm font-medium text-gray-900 dark:text-gray-100">Languages</h3>
-          <div class="mt-2 flex flex-wrap gap-2">
-            {['Python', 'SQL', 'R', 'Bash', 'JavaScript'].map((skill) => (
-              <span class="rounded-md bg-gray-100 px-3 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                {skill}
-              </span>
-            ))}
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">Adjunct Lecturer</h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2026-2027</span>
           </div>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-gray-900 dark:text-gray-100">ML / Data Science</h3>
-          <div class="mt-2 flex flex-wrap gap-2">
-            {['PyTorch', 'scikit-learn', 'pandas', 'NumPy', 'TensorFlow', 'Hugging Face', 'MLflow'].map((skill) => (
-              <span class="rounded-md bg-gray-100 px-3 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                {skill}
-              </span>
-            ))}
-          </div>
-        </div>
-
-        <div>
-          <h3 class="text-sm font-medium text-gray-900 dark:text-gray-100">Tools & Infrastructure</h3>
-          <div class="mt-2 flex flex-wrap gap-2">
-            {['Git', 'Docker', 'Linux', 'PostgreSQL', 'AWS', 'GitHub Actions'].map((skill) => (
-              <span class="rounded-md bg-gray-100 px-3 py-1 text-sm text-gray-700 dark:bg-gray-800 dark:text-gray-300">
-                {skill}
-              </span>
-            ))}
-          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 italic">
+            <a href="https://www.ece.upatras.gr/" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark">Department of Electrical and Computer Engineering</a>, University of Patras
+          </p>
+          <ul class="mt-2 list-disc space-y-1 pl-5 text-sm text-gray-600 dark:text-gray-400 marker:text-gray-300 dark:marker:text-gray-600">
+            <li>
+              <a href="/teaching/ece-y322/" class="underline hover:text-accent dark:hover:text-accent-dark"><em>Probability &amp; Statistics</em></a> (ECE_Y322)
+            </li>
+          </ul>
         </div>
       </div>
     </section>
 
-    <!-- Publications -->
-    <section>
+    <section id="books" class="scroll-mt-8">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+        Books
+      </h2>
+      <ol class="mt-4 list-decimal space-y-5 pl-5 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+        <li>
+          Verykios, V., Vasileiadis, V., Kotsiantis, S., <strong>Papastefanopoulos, V.</strong>, &amp; Tzagarakis, M. (2026).
+          <a href="https://www.dardanosnet.gr/product/vaseis-dedomenon/" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark"><em>Βάσεις Δεδομένων: Από τον Σχεδιασμό στις Εφαρμογές</em></a>
+          <span class="text-gray-500 dark:text-gray-400">(Databases: From Design to Applications)</span>.
+          Εκδόσεις Gutenberg.
+          <div class="mt-1 flex flex-wrap gap-2">
+            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">ISBN 978-960-01-2785-0</span>
+            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">Εύδοξος 153582139</span>
+          </div>
+        </li>
+        <li>
+          Verykios, V., Kotsiantis, S., <strong>Papastefanopoulos, V.</strong>, &amp; Tzagarakis, M. (2026).
+          <a href="https://newtech-pub.com/%CE%B2%CE%B9%CE%B2%CE%BB%CE%AF%CE%B1/%cf%80%ce%bb%ce%b7%cf%81%ce%bf%cf%86%ce%bf%cf%81%ce%b9%ce%ba%ce%ae/%ce%b3%ce%bb%cf%8e%cf%83%cf%83%ce%b5%cf%82-%cf%80%cf%81%ce%bf%ce%b3%cf%81%ce%b1%ce%bc%ce%bc%ce%b1%cf%84%ce%b9%cf%83%ce%bc%ce%bf%cf%8d/python-%ce%b5%ce%b9%cf%83%ce%b1%ce%b3%cf%89%ce%b3%ce%ae-%cf%83%cf%84%ce%bf%ce%bd-%cf%80%cf%81%ce%bf%ce%b3%cf%81%ce%b1%ce%bc%ce%bc%ce%b1%cf%84%ce%b9%cf%83%ce%bc%cf%8c/" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark"><em>Python: Εισαγωγή στον Προγραμματισμό</em></a>
+          <span class="text-gray-500 dark:text-gray-400">(Python: An Introduction to Programming)</span>.
+          Εκδόσεις Νέων Τεχνολογιών.
+          <div class="mt-1 flex flex-wrap gap-2">
+            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">ISBN 978-960-578-136-1</span>
+            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">Εύδοξος 153576086</span>
+          </div>
+        </li>
+        <li>
+          Kotsiantis, S., <strong>Papastefanopoulos, V.</strong>, Tsihrintzis, G., &amp; Floros, A. (2026).
+          <a href="https://papazissi.gr/el/products/michaniki-mathisi-me-python" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark"><em>Μηχανική Μάθηση με Python</em></a>
+          <span class="text-gray-500 dark:text-gray-400">(Machine Learning with Python)</span>.
+          Εκδόσεις Παπαζήση.
+          <div class="mt-1 flex flex-wrap gap-2">
+            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">ISBN 978-960-02-4712-1</span>
+            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">Εύδοξος 153585239</span>
+          </div>
+        </li>
+      </ol>
+    </section>
+
+    <section id="publications" class="scroll-mt-8">
       <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
         Publications
       </h2>
-      <div class="mt-4 space-y-4">
-        <p class="text-sm text-gray-500 dark:text-gray-400 italic">
-          Add your publications here.
-        </p>
+      <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+        Journal quartiles are <a href="https://www.scimagojr.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">SCImago Journal Rank</a> (SJR) 2025.
+      </p>
+      <ol class="mt-4 list-decimal space-y-5 pl-5 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
+        <li>
+          <strong>Papastefanopoulos, V.</strong>, Linardatos, P., &amp; Kotsiantis, S. (2025).
+          <em>Combining normalizing flows with decision trees for interpretable unsupervised outlier detection</em>.
+          <em>Engineering Applications of Artificial Intelligence</em>, 141, 109770.
+          <a href="https://doi.org/10.1016/j.engappai.2024.109770" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
+          <div class="mt-1 flex flex-wrap gap-2">
+            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">Q1</span>
+          </div>
+        </li>
+        <li>
+          Linardatos, P., <strong>Papastefanopoulos, V.</strong>, &amp; Kotsiantis, S. (2024).
+          <em>Regressor cascading for time series forecasting</em>.
+          <em>Intelligent Decision Technologies</em>, 18(2), 1139-1156.
+          <a href="https://doi.org/10.3233/IDT-240224" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
+          <div class="mt-1 flex flex-wrap gap-2">
+            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">Q3</span>
+          </div>
+        </li>
+        <li>
+          Linardatos, P., <strong>Papastefanopoulos, V.</strong>, Panagiotakopoulos, T., &amp; Kotsiantis, S. (2023).
+          <em>CO<sub>2</sub> concentration forecasting in smart cities using a hybrid ARIMA-TFT model on multivariate time series IoT data</em>.
+          <em>Scientific Reports</em>, 13(1), 17266.
+          <a href="https://doi.org/10.1038/s41598-023-42346-0" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
+          <div class="mt-1 flex flex-wrap gap-2">
+            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">Q1</span>
+          </div>
+        </li>
+        <li>
+          <strong>Papastefanopoulos, V.</strong>, Linardatos, P., Panagiotakopoulos, T., &amp; Kotsiantis, S. (2023).
+          <em>Multivariate time-series forecasting: A review of deep learning methods in internet of things applications to smart cities</em>.
+          <em>Smart Cities</em>, 6(5), 2519-2552.
+          <a href="https://doi.org/10.3390/smartcities6050114" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
+          <div class="mt-1 flex flex-wrap gap-2">
+            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">Q1</span>
+            <span class="inline-block rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">Best Paper Award</span>
+          </div>
+        </li>
+        <li>
+          <strong>Papastefanopoulos, V.</strong>, Linardatos, P., &amp; Kotsiantis, S. (2021).
+          <em>Unsupervised outlier detection: A meta-learning algorithm based on feature selection</em>.
+          <em>Electronics</em>, 10(18), 2236.
+          <a href="https://doi.org/10.3390/electronics10182236" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
+          <div class="mt-1 flex flex-wrap gap-2">
+            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">Q2</span>
+          </div>
+        </li>
+        <li>
+          Linardatos, P., <strong>Papastefanopoulos, V.</strong>, &amp; Kotsiantis, S. (2020).
+          <em>Explainable AI: A review of machine learning interpretability methods</em>.
+          <em>Entropy</em>, 23(1), 18.
+          <a href="https://doi.org/10.3390/e23010018" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
+          <div class="mt-1 flex flex-wrap gap-2">
+            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">Q2</span>
+            <span class="inline-block rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-300">Most Cited Paper in Entropy</span>
+          </div>
+        </li>
+        <li>
+          <strong>Papastefanopoulos, V.</strong>, Linardatos, P., &amp; Kotsiantis, S. (2020).
+          <em>COVID-19: A comparison of time series methods to forecast percentage of active cases per population</em>.
+          <em>Applied Sciences</em>, 10(11), 3880.
+          <a href="https://doi.org/10.3390/app10113880" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
+          <div class="mt-1 flex flex-wrap gap-2">
+            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">Q2</span>
+          </div>
+        </li>
+        <li>
+          <strong>Papastefanopoulos, V.</strong>, Karlos, S., &amp; Kotsiantis, S. (2017).
+          <em>Using Semi-Supervised Learning Methods for Credit Score Problem</em>.
+          <em>Advances in Smart Systems Research</em> (Conference Paper), 6(2), 28-40.
+          <a href="http://nimbusvault.net/publications/koala/assr/papers/k17is-222.pdf" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">PDF</a>
+        </li>
+      </ol>
+    </section>
+
+    <section id="awards" class="scroll-mt-8">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+        Awards &amp; Honours
+      </h2>
+      <div class="mt-4 space-y-6">
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">
+              <a href="https://www.mdpi.com/about/announcements/11391" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark">Best Paper Award</a>
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2023</span>
+          </div>
+          <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            From <em>Smart Cities</em> (MDPI), for the review <em>Multivariate Time-Series Forecasting: A Review of Deep Learning Methods in Internet of Things Applications to Smart Cities</em>.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">
+              <a href="https://www.mdpi.com/journal/entropy/most_cited" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark">Most Cited Paper</a>
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2020</span>
+          </div>
+          <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            Most-cited paper in the history of <em>Entropy</em> (MDPI, est. 1999), for <em>Explainable AI: A Review of Machine Learning Interpretability Methods</em>.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">
+              <a href="http://www.arnaoutisfoundation.com/News.html" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark">The General Michael Arnaoutis Foundation Scholarship</a>
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2017</span>
+          </div>
+          <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            Postgraduate excellence scholarship awarded to Greek students for studies abroad in technology and related fields. Partially funded my M.Sc. at UCL.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">Ranked 3rd in Graduating Class</h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2017</span>
+          </div>
+          <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            Third among fourth-year graduates of the Department of Mathematics, University of Patras, from an entering cohort of 372.
+          </p>
+        </div>
+
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">Ministry of Education Scholarship</h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2008</span>
+          </div>
+          <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            Undergraduate excellence scholarship, awarded on the basis of national university entrance examination results.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="service" class="scroll-mt-8">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+        Service &amp; Reviewing
+      </h2>
+      <div class="mt-4 space-y-6">
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">Guest Editor Assistant</h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2026-Present</span>
+          </div>
+          <p class="text-sm text-gray-600 dark:text-gray-400 italic"><em>Entropy</em> (MDPI)</p>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            Special Issue: <a href="https://www.mdpi.com/journal/entropy/special_issues/7V771408WY" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark"><em>Explainable Artificial Intelligence for Complex and Data-Driven Systems: Methods, Evaluation, and Applications</em></a>. With <a href="https://www.math.upatras.gr/?section=2174&amp;language=en_US&amp;itemid2354=2720&amp;detail2354=1" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">Prof. Sotiris Kotsiantis</a> as Guest Editor.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section id="open-source" class="scroll-mt-8">
+      <h2 class="text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400">
+        Open Source Contributions
+      </h2>
+      <div class="mt-4 space-y-6">
+        <div>
+          <div class="flex flex-col sm:flex-row sm:items-baseline sm:justify-between">
+            <h3 class="font-semibold text-gray-900 dark:text-gray-100">
+              <a href="https://openretailscience.datasimply.co/" target="_blank" rel="noopener noreferrer" class="hover:text-accent dark:hover:text-accent-dark">OpenRetailScience</a>
+            </h3>
+            <span class="text-sm text-gray-500 dark:text-gray-400">2024</span>
+          </div>
+          <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+            Contributor to an open-source Python library for retail data analysis, with a focus on segmentation methods, statistical analysis, and visualisation.
+          </p>
+        </div>
       </div>
     </section>
   </div>

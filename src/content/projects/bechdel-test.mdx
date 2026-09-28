@@ -1,0 +1,15 @@
+---
+title: "Bechdel Test on Movie Scripts"
+description: "Web-scraping and NLP analysis of movie scripts from IMSDb, with an automated implementation of the Bechdel test on dialogue and character interactions."
+category: "data-ml"
+tech: ["Python", "BeautifulSoup", "pandas"]
+github: "https://github.com/vpapastef/project_BechdelTest"
+sortOrder: 4
+year: 2018
+---
+
+## Overview
+
+The [Bechdel test](https://en.wikipedia.org/wiki/Bechdel_test) asks whether a film has at least two named female characters who talk to each other about something other than a man. This project scrapes movie scripts from the [Internet Movie Script Database](https://www.imsdb.com/), parses dialogue and character lists with BeautifulSoup, and applies an automated version of the test at corpus scale.
+
+Outputs a per-film pass/fail label plus aggregate statistics across the corpus (`movie_statistics.csv`).
