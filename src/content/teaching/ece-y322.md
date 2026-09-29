@@ -52,6 +52,7 @@ lectures:
   - n: 1
     title: "Βασική Πιθανοθεωρία και Συνδυαστική Ανάλυση"
     titleEn: "Basic Probability Theory and Combinatorics"
+    file: "lecture-01.pdf"
   - n: 2
     title: "Δεσμευμένη Πιθανότητα και Ανεξαρτησία"
     titleEn: "Conditional Probability and Independence"
