@@ -1,0 +1,108 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import NoteCard from '../../components/NoteCard.astro';
+import { getCollection } from 'astro:content';
+import { bookSlugOf, entrySlugOf, previewOf, byline, formatDate } from '../../lib/reading';
+
+const books = await getCollection('books', ({ data }) => !data.draft);
+const notes = await getCollection('notes', ({ data }) => !data.draft);
+
+const bookById = new Map(books.map((b) => [b.id, b]));
+
+const rows = books.map((book) => {
+  const entries = notes.filter((n) => bookSlugOf(n) === book.id);
+  const latest = entries.length
+    ? entries.reduce((a, b) => (a.data.date > b.data.date ? a : b)).data.date
+    : null;
+  return { book, count: entries.length, latest };
+});
+
+rows.sort((a, b) => {
+  if (a.book.data.status !== b.book.data.status) {
+    return a.book.data.status === 'reading' ? -1 : 1;
+  }
+  return (b.latest?.valueOf() ?? 0) - (a.latest?.valueOf() ?? 0);
+});
+
+const activeTag = Astro.url.searchParams.get('tag');
+const tagged = activeTag
+  ? notes
+      .filter((n) => n.data.tags.includes(activeTag))
+      .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+  : [];
+---
+
+<BaseLayout title="Reading" description="Notes on books, kept as I read them.">
+  <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+    Reading diary
+  </h1>
+  <p class="mt-4 text-gray-600 dark:text-gray-400">
+    Notes on books, kept as I read them. Not reviews.
+  </p>
+
+  {activeTag ? (
+    <>
+      <div class="mt-8 flex items-baseline gap-3">
+        <p class="text-sm text-gray-600 dark:text-gray-400">
+          {tagged.length} {tagged.length === 1 ? 'note' : 'notes'} tagged
+          <span class="font-medium text-gray-900 dark:text-gray-100">{activeTag}</span>
+        </p>
+        <a href="/reading/" class="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+          Clear
+        </a>
+      </div>
+
+      <div class="mt-8 space-y-10">
+        {tagged.map((note) => (
+          <NoteCard
+            title={note.data.title}
+            preview={previewOf(note)}
+            date={note.data.date}
+            tags={note.data.tags}
+            context={bookById.get(bookSlugOf(note))?.data.title}
+            href={`/reading/${bookSlugOf(note)}/${entrySlugOf(note)}/`}
+          />
+        ))}
+      </div>
+    </>
+  ) : (
+    <div class="mt-10 space-y-4">
+      {rows.map(({ book, count, latest }) => (
+        <a
+          href={`/reading/${book.id}/`}
+          class="block rounded-lg border border-gray-200 p-5 transition-colors hover:border-gray-300 hover:bg-gray-50 dark:border-gray-800 dark:hover:border-gray-700 dark:hover:bg-gray-900"
+        >
+          <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+            <h2 class="font-semibold text-gray-900 dark:text-gray-100">{book.data.title}</h2>
+            <span
+              class:list={[
+                'shrink-0 rounded-full px-2.5 py-0.5 text-xs font-medium',
+                book.data.status === 'reading'
+                  ? 'bg-amber-100 text-amber-800 dark:bg-amber-900/30 dark:text-amber-300'
+                  : 'bg-gray-100 text-gray-600 dark:bg-gray-800 dark:text-gray-400',
+              ]}
+            >
+              {book.data.status === 'reading' ? 'Reading' : 'Finished'}
+            </span>
+          </div>
+
+          {book.data.subtitle && (
+            <p class="mt-0.5 text-sm italic text-gray-500 dark:text-gray-400">{book.data.subtitle}</p>
+          )}
+
+          <p class="mt-1 text-sm text-gray-600 dark:text-gray-400">
+            {byline(book.data.authors)}{book.data.year ? ` · ${book.data.year}` : ''}
+          </p>
+
+          <p class="mt-3 text-xs text-gray-500 dark:text-gray-500">
+            {count === 0
+              ? 'No notes yet'
+              : `${count} ${count === 1 ? 'note' : 'notes'}${latest ? ` · last on ${formatDate(latest)}` : ''}`}
+          </p>
+        </a>
+      ))}
+    </div>
+  )}
+
+  {rows.length === 0 && <p class="mt-10 text-gray-600 dark:text-gray-400">Nothing here yet.</p>}
+</BaseLayout>

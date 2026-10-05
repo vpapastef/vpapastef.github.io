@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+
+const interests: { title: string; note: string | string[] }[] = [
+  { title: 'Data Science & Machine Learning', note: "It's what I do for a living, and what my PhD was on." },
+  {
+    title: 'Moral Philosophy',
+    note: 'I’m a moral realist. At the moment, I’m reading <a href="/reading/reasons-and-persons/" class="underline hover:text-accent dark:hover:text-accent-dark">Parfit</a>.',
+  },
+  {
+    title: 'Animals',
+    note:
+      "They matter. Three of them let me share their home: " +
+      '<a href="/cats/" class="underline hover:text-accent dark:hover:text-accent-dark">Judy, Froggie, and Sookie</a>.',
+  },
+  { title: 'Applied Ethics', note: 'The environment. Climate change. What we owe existing and future beings.' },
+  { title: 'Video Games', note: "Although I haven't played one in ages :(" },
+  { title: 'Movies & Series', note: 'Always with subtitles on.' },
+];
+---
+
+<BaseLayout
+  title="About"
+  description="Vasilis Papastefanopoulos. Machine learning, applied ethics, and cats."
+>
+  <section class="py-8">
+    <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+      About
+    </h1>
+
+    <dl class="mt-8 space-y-6 leading-relaxed">
+      {interests.map((it) => (
+        <div>
+          <dt class="font-semibold text-gray-900 dark:text-gray-100">{it.title}</dt>
+          {it.note && (
+            <dd class="mt-0.5 text-gray-600 dark:text-gray-400">
+              {Array.isArray(it.note) && it.note.length > 1 ? (
+                <ul class="list-disc space-y-1 pl-5 marker:text-gray-300 dark:marker:text-gray-600">
+                  {it.note.map((n) => <li set:html={n} />)}
+                </ul>
+              ) : (
+                <span set:html={Array.isArray(it.note) ? it.note[0] : it.note} />
+              )}
+            </dd>
+          )}
+        </div>
+      ))}
+    </dl>
+  </section>
+</BaseLayout>

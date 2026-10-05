@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import TagList from '../../../components/TagList.astro';
+import { getCollection, getEntry, render } from 'astro:content';
+import { bookSlugOf, entrySlugOf, previewOf, byline, formatDate } from '../../../lib/reading';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes', ({ data }) => !data.draft);
+  return notes.map((note) => ({
+    params: { book: bookSlugOf(note), entry: entrySlugOf(note) },
+    props: { note },
+  }));
+}
+
+const { note } = Astro.props;
+const book = await getEntry('books', bookSlugOf(note));
+const { Content } = await render(note);
+---
+
+<BaseLayout title={note.data.title} description={previewOf(note, 160)}>
+  <a
+    href={`/reading/${bookSlugOf(note)}/`}
+    class="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200"
+  >
+    ← {book?.data.title ?? 'Reading'}
+  </a>
+
+  <article class="mt-4">
+    <header class="border-b border-gray-200 pb-6 dark:border-gray-800">
+      <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
+        {note.data.title}
+      </h1>
+      <p class="mt-2 text-sm text-gray-500 dark:text-gray-400">
+        <time datetime={note.data.date.toISOString()}>{formatDate(note.data.date)}</time>
+        {book && <> · on <em>{book.data.title}</em> by {byline(book.data.authors)}</>}
+      </p>
+
+      {(note.data.chapter || note.data.pages) && (
+        <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+          {[note.data.chapter, note.data.pages && `pp. ${note.data.pages}`]
+            .filter(Boolean)
+            .join(' · ')}
+        </p>
+      )}
+
+      {note.data.tags.length > 0 && (
+        <div class="mt-3">
+          <TagList tags={note.data.tags} />
+        </div>
+      )}
+    </header>
+
+    <div class="prose prose-gray mt-8 max-w-none dark:prose-invert">
+      <Content />
+    </div>
+  </article>
+</BaseLayout>

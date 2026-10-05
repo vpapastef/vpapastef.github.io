@@ -1,0 +1,209 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { fileSize, archive, formatBytes } from '../../lib/teaching';
+
+export async function getStaticPaths() {
+  const modules = await getCollection('teaching', ({ data }) => !data.draft);
+  return modules.map((m) => ({ params: { module: m.id }, props: { module: m } }));
+}
+
+const { module } = Astro.props;
+const d = module.data;
+const el = d.el;
+
+const bilingual = Boolean(el && (el.syllabus.length || el.title));
+
+const en = {
+  title: d.title,
+  code: d.code,
+  place: [d.department, d.institution].filter(Boolean).join(' · '),
+  when: [d.semester, d.term].filter(Boolean).join(' · '),
+  summary: d.summary,
+  syllabus: d.syllabus,
+};
+const gr = {
+  title: el?.title ?? d.title,
+  code: el?.code ?? d.code,
+  place: [el?.department ?? d.department, el?.institution ?? d.institution]
+    .filter(Boolean).join(' · '),
+  when: [el?.semester ?? d.semester, d.term].filter(Boolean).join(' · '),
+  summary: el?.summary ?? d.summary,
+  syllabus: el?.syllabus?.length ? el.syllabus : d.syllabus,
+};
+
+const bold = (t: string) => t.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+
+const rows = [...d.lectures]
+  .sort((a, b) => a.n - b.n)
+  .map((l) => {
+    const size = l.file ? fileSize(module.id, l.file) : null;
+    return { ...l, href: l.file && size !== null ? `/teaching/${module.id}/${l.file}` : null, size };
+  });
+const available = rows.filter((r) => r.href).length;
+const zip = archive(module.id);
+---
+
+<BaseLayout
+  title={en.title}
+  description={en.summary ?? `${en.title} (${en.code}) at ${d.institution}.`}
+>
+  <div class="flex items-baseline justify-between gap-4">
+    <a href="/teaching/" class="text-sm text-gray-500 hover:text-gray-700 dark:text-gray-400 dark:hover:text-gray-200">
+      ← Teaching
+    </a>
+    {bilingual && (
+      <button
+        type="button"
+        id="lang-toggle"
+        class="shrink-0 rounded-md border border-gray-300 px-3 py-1 text-xs font-medium text-gray-600 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:text-gray-400 dark:hover:bg-gray-800"
+      >
+        EN
+      </button>
+    )}
+  </div>
+
+  <header class="mt-4 border-b border-gray-200 pb-6 dark:border-gray-800">
+    <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between">
+      <h1 class="text-2xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-3xl">
+        <span data-lang="en" hidden>{en.title}</span><span data-lang="el">{gr.title}</span>
+      </h1>
+      <span class="shrink-0 text-sm font-medium text-gray-500 dark:text-gray-400">
+        <span data-lang="en" hidden>{en.code}</span><span data-lang="el">{gr.code}</span>
+      </span>
+    </div>
+    <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+      <span data-lang="en" hidden>{en.place}</span><span data-lang="el">{gr.place}</span>
+    </p>
+    <p class="mt-1 text-sm text-gray-500 dark:text-gray-400">
+      <span data-lang="en" hidden>{en.when}</span><span data-lang="el">{gr.when}</span>
+    </p>
+  </header>
+
+  <div role="tablist" aria-label="Sections" class="mt-6 flex flex-wrap gap-3">
+    <button
+      type="button" role="tab" id="tab-syllabus" aria-controls="panel-syllabus" aria-selected="true"
+      class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+    >
+      <span data-lang="en" hidden>Syllabus</span><span data-lang="el">Ύλη</span>
+    </button>
+    <button
+      type="button" role="tab" id="tab-slides" aria-controls="panel-slides" aria-selected="false"
+      class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+    >
+      <span data-lang="en" hidden>Slides</span><span data-lang="el">Διαφάνειες</span>
+    </button>
+  </div>
+
+  <section id="panel-syllabus" role="tabpanel" aria-labelledby="tab-syllabus" class="mt-8">
+    <div data-lang="en" hidden class="mt-6 space-y-4">
+      {en.syllabus.map((para) => (
+        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed" set:html={bold(para)} />
+      ))}
+    </div>
+    <div data-lang="el" class="mt-6 space-y-4">
+      {gr.syllabus.map((para) => (
+        <p class="text-sm text-gray-600 dark:text-gray-400 leading-relaxed" set:html={bold(para)} />
+      ))}
+    </div>
+  </section>
+
+  <section id="panel-slides" role="tabpanel" aria-labelledby="tab-slides" class="mt-8">
+    {zip && (
+      <div class="mb-4 flex justify-end">
+        <a
+          href={zip.href}
+          download
+          class="rounded-md bg-gray-900 px-3 py-1.5 text-sm font-medium text-white transition-colors hover:bg-gray-700 dark:bg-gray-100 dark:text-gray-900 dark:hover:bg-gray-300"
+        >
+          <span data-lang="en" hidden>Download all ({available}, {formatBytes(zip.size)})</span>
+          <span data-lang="el">Λήψη όλων ({available}, {formatBytes(zip.size)})</span>
+        </a>
+      </div>
+    )}
+
+    {rows.length === 0 ? (
+      <p class="text-gray-600 dark:text-gray-400">
+        <span data-lang="en" hidden>Material will appear here as the course runs.</span>
+        <span data-lang="el">Το υλικό θα αναρτάται καθώς προχωρά το μάθημα.</span>
+      </p>
+    ) : (
+      <ol class="divide-y divide-gray-100 dark:divide-gray-900">
+        {rows.map((r) => (
+          <li class="flex flex-wrap items-baseline justify-between gap-x-4 gap-y-1 py-3">
+            <span class="text-gray-900 dark:text-gray-100">
+              <span class="text-gray-500 dark:text-gray-400">
+                <span data-lang="en" hidden>Week {r.week ?? r.n}</span
+                ><span data-lang="el">Εβδομάδα {r.week ?? r.n}</span>
+              </span>
+              {' — '}<span data-lang="en" hidden>{r.titleEn ?? r.title}</span><span data-lang="el">{r.title}</span>
+            </span>
+            {r.href ? (
+              <a
+                href={r.href}
+                download
+                class="shrink-0 text-sm text-gray-500 underline hover:text-accent dark:text-gray-400 dark:hover:text-accent-dark"
+              >
+                <span data-lang="en" hidden>Download</span><span data-lang="el">Λήψη</span>
+                {r.size !== null && ` (${formatBytes(r.size)})`}
+              </a>
+            ) : (
+              <span class="shrink-0 text-sm text-gray-400 dark:text-gray-600">
+                <span data-lang="en" hidden>Not yet available</span
+                ><span data-lang="el">Μη διαθέσιμο ακόμη</span>
+              </span>
+            )}
+          </li>
+        ))}
+      </ol>
+    )}
+  </section>
+</BaseLayout>
+
+<script>
+  const toggle = document.getElementById('lang-toggle');
+
+  function apply(lang: 'en' | 'el') {
+    document.querySelectorAll<HTMLElement>('[data-lang]').forEach((n) => {
+      n.hidden = n.dataset.lang !== lang;
+    });
+    if (toggle) toggle.textContent = lang === 'en' ? 'GR' : 'EN';
+    document.documentElement.lang = lang;
+  }
+
+  const KEY = 'teaching-lang-v2';
+
+  let current: 'en' | 'el' = 'el';
+  try {
+    if (localStorage.getItem(KEY) === 'en') current = 'en';
+  } catch {
+  }
+  apply(current);
+
+  toggle?.addEventListener('click', () => {
+    current = current === 'en' ? 'el' : 'en';
+    apply(current);
+    try {
+      localStorage.setItem(KEY, current);
+    } catch {
+    }
+  });
+
+  const tabs = Array.from(document.querySelectorAll<HTMLElement>('[role="tab"]'));
+  const ON = ['bg-gray-900', 'text-white', 'border-transparent', 'dark:bg-gray-100', 'dark:text-gray-900'];
+  const OFF = ['border-gray-300', 'text-gray-700', 'dark:border-gray-700', 'dark:text-gray-300'];
+
+  function selectTab(name: string) {
+    for (const t of tabs) {
+      const on = t.id === `tab-${name}`;
+      t.setAttribute('aria-selected', String(on));
+      ON.forEach((c) => t.classList.toggle(c, on));
+      OFF.forEach((c) => t.classList.toggle(c, !on));
+      const panel = document.getElementById(t.getAttribute('aria-controls') ?? '');
+      if (panel) panel.hidden = !on;
+    }
+  }
+
+  tabs.forEach((t) => t.addEventListener('click', () => selectTab(t.id.replace('tab-', ''))));
+  selectTab(location.hash === '#slides' ? 'slides' : 'syllabus');
+</script>
