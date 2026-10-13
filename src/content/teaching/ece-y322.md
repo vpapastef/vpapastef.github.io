@@ -60,6 +60,7 @@ lectures:
   - n: 3
     title: "Μονοδιάστατες Τυχαίες Μεταβλητές"
     titleEn: "Univariate Random Variables"
+    file: "lecture-03.pdf"
   - n: 4
     title: "Μέση Τιμή, Διασπορά και Ροπές"
     titleEn: "Mean, Variance and Moments"
