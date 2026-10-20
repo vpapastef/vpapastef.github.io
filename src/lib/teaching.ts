@@ -13,14 +13,19 @@ export function fileSize(slug: string, file: string): number | null {
   }
 }
 
-export function archive(slug: string): { href: string; size: number } | null {
-  const name = `${slug}.zip`;
+function zip(slug: string, name: string): { href: string; size: number } | null {
   const size = fileSize(slug, name);
   return size === null ? null : { href: `/teaching/${slug}/${name}`, size };
 }
 
+// Written by scripts/zip-lectures.sh before each build: slug.zip holds every
+// PDF, slug-<part>.zip the PDFs of one type (lecture-01.pdf, lecture-02.pdf, ...).
+export function archive(slug: string, part?: string) {
+  return zip(slug, part ? `${slug}-${part}.zip` : `${slug}.zip`);
+}
+
+// Rounded to 0.1 MB: a student only needs the order of magnitude.
 export function formatBytes(bytes: number): string {
-  if (bytes < 1024) return `${bytes} B`;
-  if (bytes < 1024 * 1024) return `${Math.round(bytes / 1024)} KB`;
-  return `${(bytes / (1024 * 1024)).toFixed(1)} MB`;
+  const mb = bytes / (1024 * 1024);
+  return mb < 0.1 ? '<0.1 MB' : `${mb.toFixed(1)} MB`;
 }

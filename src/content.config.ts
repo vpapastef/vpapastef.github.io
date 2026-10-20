@@ -76,6 +76,8 @@ const teaching = defineCollection({
       title: z.string(),
       titleEn: z.string().optional(),
       file: z.string().optional(),
+      exercises: z.string().optional(),
+      summary: z.string().optional(),
       week: z.number().optional(),
     })).default([]),
     draft: z.boolean().default(false),

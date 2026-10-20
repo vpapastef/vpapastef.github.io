@@ -53,17 +53,26 @@ lectures:
     title: "Βασική Πιθανοθεωρία και Συνδυαστική Ανάλυση"
     titleEn: "Basic Probability Theory and Combinatorics"
     file: "lecture-01.pdf"
+    exercises: "exercises-01.pdf"
+    summary: "summary-01.pdf"
   - n: 2
     title: "Δεσμευμένη Πιθανότητα και Ανεξαρτησία"
     titleEn: "Conditional Probability and Independence"
     file: "lecture-02.pdf"
+    exercises: "exercises-02.pdf"
+    summary: "summary-02.pdf"
   - n: 3
     title: "Μονοδιάστατες Τυχαίες Μεταβλητές"
     titleEn: "Univariate Random Variables"
     file: "lecture-03.pdf"
+    exercises: "exercises-03.pdf"
+    summary: "summary-03.pdf"
   - n: 4
     title: "Μέση Τιμή, Διασπορά και Ροπές"
     titleEn: "Mean, Variance and Moments"
+    file: "lecture-04.pdf"
+    exercises: "exercises-04.pdf"
+    summary: "summary-04.pdf"
   - n: 5
     title: "Διακριτά Πρότυπα και η Διαδικασία Poisson"
     titleEn: "Discrete Models and the Poisson Process"

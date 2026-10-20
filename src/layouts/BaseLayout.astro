@@ -8,12 +8,15 @@ interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  /** a wider column, for pages with a table */
+  wide?: boolean;
 }
 
 const {
   title,
   description = 'Personal website of Vasilis Papastefanopoulos. Machine learning, applied ethics, and cats.',
   ogImage,
+  wide = false,
 } = Astro.props;
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
@@ -73,7 +76,7 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
     <div class="fixed right-4 top-4 z-50">
       <ThemeToggle />
     </div>
-    <main class="mx-auto w-full max-w-3xl flex-1 px-6 py-12">
+    <main class:list={["mx-auto w-full flex-1 px-6 py-12", wide ? "max-w-5xl" : "max-w-3xl"]}>
       <slot />
     </main>
     <Footer />
