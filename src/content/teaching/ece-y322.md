@@ -9,20 +9,21 @@ term: "2026-2027"
 summary: "Probability and distribution theory through to statistical inference."
 syllabus:
   - >-
-      **Part I.** Basic probability theory, combinatorics and applications, conditional probability. Random variable
-      s in one and two dimensions. Distribution, probability and density functions. Change of variables, independenc
-      e, convolutions. Conditional distributions. Moments, moment generating functions and characteristic functions.
-       Covariance and correlation. Useful models: Bernoulli, binomial, multinomial, hypergeometric, geometric, negat
-      ive binomial, Poisson, uniform, exponential, Gamma, Beta, Weibull, normal, lognormal, χ², t and F. The Poisson
-       process. Probability inequalities and limit theorems. System reliability and failure rates. The exponential a
-      nd Weibull distributions in reliability.
+      **Part I.** Basic probability theory, combinatorics and applications, conditional probability.
+      Random variables in one and two dimensions. Distribution, probability and density functions. Change
+      of variables, independence, convolutions. Conditional distributions. Moments, moment generating
+      functions and characteristic functions. Covariance and correlation. Useful models: Bernoulli,
+      binomial, multinomial, hypergeometric, geometric, negative binomial, Poisson, uniform, exponential,
+      Gamma, Beta, Weibull, normal, lognormal, χ², t and F. The Poisson process. Probability inequalities
+      and limit theorems. System reliability and failure rates. The exponential and Weibull distributions
+      in reliability.
   - >-
-      **Part II.** Sampling techniques. Descriptive statistics. Sampling distributions and basic normal-population t
-      heory. Principles of point estimation. Interval estimation: confidence intervals for the mean, proportion and 
-      variance of one population, and for the difference of means, of proportions and the ratio of variances of two 
-      populations. Hypothesis tests for the mean, proportion and variance of one population, and for the difference 
-      of means, of proportions and the ratio of variances of two populations. Linear regression: the simple linear m
-      odel.
+      **Part II.** Sampling techniques. Descriptive statistics. Sampling distributions and basic
+      normal-population theory. Principles of point estimation. Interval estimation: confidence intervals
+      for the mean, proportion and variance of one population, and for the difference of means, of
+      proportions and the ratio of variances of two populations. Hypothesis tests for the mean, proportion
+      and variance of one population, and for the difference of means, of proportions and the ratio of
+      variances of two populations. Linear regression: the simple linear model.
 el:
   title: "Πιθανοθεωρία & Στατιστική"
   code: "ECE_Υ322"
@@ -32,20 +33,21 @@ el:
   summary: "Από τη θεωρία πιθανοτήτων και κατανομών έως τη στατιστική συμπερασματολογία."
   syllabus:
     - >-
-        **Μέρος I.** Βασική πιθανοθεωρία, συνδυαστική ανάλυση και εφαρμογές, δεσμευμένη πιθανότητα. Μονοδιάστατες και 
-        δισδιάστατες τυχαίες μεταβλητές. Συναρτήσεις κατανομής, πιθανότητας και πυκνότητας πιθανότητας. Αλλαγή μεταβλη
-        τών, ανεξαρτησία, συνελίξεις. Κατανομές υπό συνθήκη. Ροπές, ροπογεννήτριες και χαρακτηριστικές συναρτήσεις. Συ
-        νδιασπορά και συσχέτιση. Μελέτη χρήσιμων προτύπων: κατανομές Bernoulli, διωνυμική, πολυωνυμική, υπεργεωμετρική
-        , γεωμετρική, αρνητική διωνυμική, Poisson, ομοιόμορφη, εκθετική, Γάμμα, Βήτα, Weibull, κανονική, λογαριθμοκανο
-        νική, χ², t και F. Η διαδικασία Poisson. Ανισότητες και οριακά θεωρήματα πιθανοτήτων. Αξιοπιστία συστημάτων κα
-        ι ρυθμοί αποτυχίας. Η εκθετική και η Weibull κατανομή στην αξιοπιστία.
+        **Μέρος I.** Βασική πιθανοθεωρία, συνδυαστική ανάλυση και εφαρμογές, δεσμευμένη πιθανότητα.
+        Μονοδιάστατες και δισδιάστατες τυχαίες μεταβλητές. Συναρτήσεις κατανομής, πιθανότητας και πυκνότητας
+        πιθανότητας. Αλλαγή μεταβλητών, ανεξαρτησία, συνελίξεις. Κατανομές υπό συνθήκη. Ροπές,
+        ροπογεννήτριες και χαρακτηριστικές συναρτήσεις. Συνδιασπορά και συσχέτιση. Μελέτη χρήσιμων προτύπων:
+        κατανομές Bernoulli, διωνυμική, πολυωνυμική, υπεργεωμετρική, γεωμετρική, αρνητική διωνυμική,
+        Poisson, ομοιόμορφη, εκθετική, Γάμμα, Βήτα, Weibull, κανονική, λογαριθμοκανονική, χ², t και F. Η
+        διαδικασία Poisson. Ανισότητες και οριακά θεωρήματα πιθανοτήτων. Αξιοπιστία συστημάτων και ρυθμοί
+        αποτυχίας. Η εκθετική και η Weibull κατανομή στην αξιοπιστία.
     - >-
-        **Μέρος II.** Τεχνικές δειγματοληψίας. Περιγραφική στατιστική. Δειγματοληπτικές κατανομές και βασική θεωρία κα
-        νονικού πληθυσμού. Αρχές σημειοεκτιμητικής. Εκτιμητική διαστήματος: διαστήματα εμπιστοσύνης για τη μέση τιμή, 
-        αναλογία και διασπορά ενός πληθυσμού. Διαστήματα εμπιστοσύνης για τη διαφορά μέσων τιμών, αναλογιών και λόγου 
-        διασπορών δύο πληθυσμών. Έλεγχοι υποθέσεων για τη μέση τιμή, αναλογία και διασπορά ενός πληθυσμού. Έλεγχοι υπο
-        θέσεων για τη διαφορά μέσων τιμών, αναλογιών και λόγου διασπορών δύο πληθυσμών. Γραμμική παλινδρόμηση: το απλό
-         γραμμικό μοντέλο.
+        **Μέρος II.** Τεχνικές δειγματοληψίας. Περιγραφική στατιστική. Δειγματοληπτικές κατανομές και βασική
+        θεωρία κανονικού πληθυσμού. Αρχές σημειοεκτιμητικής. Εκτιμητική διαστήματος: διαστήματα εμπιστοσύνης
+        για τη μέση τιμή, αναλογία και διασπορά ενός πληθυσμού. Διαστήματα εμπιστοσύνης για τη διαφορά μέσων
+        τιμών, αναλογιών και λόγου διασπορών δύο πληθυσμών. Έλεγχοι υποθέσεων για τη μέση τιμή, αναλογία και
+        διασπορά ενός πληθυσμού. Έλεγχοι υποθέσεων για τη διαφορά μέσων τιμών, αναλογιών και λόγου διασπορών
+        δύο πληθυσμών. Γραμμική παλινδρόμηση: το απλό γραμμικό μοντέλο.
 ects: 4
 url: "https://www.ece.upatras.gr/"
 lectures:
