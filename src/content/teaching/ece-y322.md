@@ -76,8 +76,8 @@ lectures:
     exercises: "exercises-04.pdf"
     summary: "summary-04.pdf"
   - n: 5
-    title: "Διακριτά Πρότυπα και η Διαδικασία Poisson"
-    titleEn: "Discrete Models and the Poisson Process"
+    title: "Διακριτά Πρότυπα Κατανομών"
+    titleEn: "Discrete Distribution Models"
   - n: 6
     title: "Συνεχή Πρότυπα Κατανομών"
     titleEn: "Continuous Distribution Models"
@@ -100,6 +100,6 @@ lectures:
     title: "Έλεγχοι Υποθέσεων"
     titleEn: "Hypothesis Tests"
   - n: 13
-    title: "Γραμμική Παλινδρόμηση και Ανασκόπηση"
-    titleEn: "Linear Regression and Review"
+    title: "Γραμμική Παλινδρόμηση"
+    titleEn: "Linear Regression"
 ---
