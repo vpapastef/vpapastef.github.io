@@ -78,6 +78,9 @@ lectures:
   - n: 5
     title: "Διακριτά Πρότυπα Κατανομών"
     titleEn: "Discrete Distribution Models"
+    file: "lecture-05.pdf"
+    exercises: "exercises-05.pdf"
+    summary: "summary-05.pdf"
   - n: 6
     title: "Συνεχή Πρότυπα Κατανομών"
     titleEn: "Continuous Distribution Models"
