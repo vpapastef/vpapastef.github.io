@@ -29,6 +29,15 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
+      # scripts/merge-week.py, run by the prebuild step, merges each week's PDFs
+      - name: Setup Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+
+      - name: Install PDF tools
+        run: pip install pypdf==6.10.2 pymupdf==1.27.1
+
       - name: Build with Astro
         uses: withastro/action@v3
 

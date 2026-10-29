@@ -16,3 +16,4 @@ pnpm-debug.log*
 .idea/
 
 public/teaching/**/*.zip
+public/teaching/*/*-week-*.pdf

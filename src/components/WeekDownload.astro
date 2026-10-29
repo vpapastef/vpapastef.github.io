@@ -1,0 +1,74 @@
+---
+// The «Όλα» of a week: its PDFs as one merged PDF or as a zip, both written
+// by scripts/zip-lectures.sh. Without the merged PDF it links to the zip.
+import { formatBytes } from '../lib/teaching';
+
+interface Props {
+  zip: { href: string; size: number };
+  pdf: { href: string; size: number } | null;
+  class?: string;
+  pad: string;
+}
+
+const { zip, pdf, class: where = '', pad } = Astro.props;
+const button = `${pad} whitespace-nowrap rounded-md border border-gray-300 text-sm text-gray-700 transition-colors hover:border-accent hover:text-accent dark:border-gray-700 dark:text-gray-300 dark:hover:border-accent-dark dark:hover:text-accent-dark`;
+const item = 'flex items-baseline justify-between gap-6 whitespace-nowrap px-3 py-2 text-gray-700 transition-colors hover:bg-gray-50 hover:text-accent dark:text-gray-300 dark:hover:bg-gray-800 dark:hover:text-accent-dark';
+---
+
+{pdf ? (
+  <details class={`group relative ${where}`} data-week-menu>
+    <summary class={`block cursor-pointer list-none [&::-webkit-details-marker]:hidden ${button}`}>
+      <svg class="inline-block align-[-4px]" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+      <span><span data-lang="en" hidden>All</span><span data-lang="el">Όλα</span></span>
+      <svg class="ml-0.5 inline-block align-[-2px] transition-transform group-open:rotate-180" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="m6 9 6 6 6-6"/></svg>
+    </summary>
+    <div data-week-panel class="absolute left-0 top-full z-10 mt-1 rounded-md border border-gray-200 bg-white py-1 text-sm shadow-lg dark:border-gray-700 dark:bg-gray-900">
+      <a href={pdf.href} download class={item}>
+        <span>.pdf</span>
+        <span class="text-xs text-gray-400 dark:text-gray-500">{formatBytes(pdf.size)}</span>
+      </a>
+      <a href={zip.href} download class={item}>
+        <span>.zip</span>
+        <span class="text-xs text-gray-400 dark:text-gray-500">{formatBytes(zip.size)}</span>
+      </a>
+    </div>
+  </details>
+) : (
+  <a href={zip.href} download class={`${where} ${button}`}>
+    <svg class="inline-block align-[-4px]" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+    <span><span data-lang="en" hidden>All</span><span data-lang="el">Όλα</span></span>
+    <span class="text-xs text-gray-400 dark:text-gray-500">{formatBytes(zip.size)}</span>
+  </a>
+)}
+
+<script>
+  const menus = () => document.querySelectorAll<HTMLDetailsElement>('details[data-week-menu]');
+
+  // one menu open at a time, closed by a click elsewhere, Escape, or a choice
+  document.addEventListener('click', (e) => {
+    menus().forEach((d) => {
+      if (!d.contains(e.target as Node)) d.open = false;
+    });
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    menus().forEach((d) => {
+      if (!d.open) return;
+      d.open = false;
+      d.querySelector('summary')?.focus();
+    });
+  });
+  menus().forEach((d) => {
+    d.querySelectorAll('a').forEach((a) => a.addEventListener('click', () => (d.open = false)));
+    // it opens to the right, or to the left when the right edge would cut it
+    d.addEventListener('toggle', () => {
+      const panel = d.querySelector<HTMLElement>('[data-week-panel]');
+      if (!d.open || !panel) return;
+      panel.style.left = panel.style.right = '';
+      if (panel.getBoundingClientRect().right > document.documentElement.clientWidth - 16) {
+        panel.style.left = 'auto';
+        panel.style.right = '0';
+      }
+    });
+  });
+</script>
