@@ -84,6 +84,9 @@ lectures:
   - n: 6
     title: "Συνεχή Πρότυπα Κατανομών"
     titleEn: "Continuous Distribution Models"
+    file: "lecture-06.pdf"
+    exercises: "exercises-06.pdf"
+    summary: "summary-06.pdf"
   - n: 7
     title: "Δισδιάστατες Τυχαίες Μεταβλητές και Ροπογεννήτριες"
     titleEn: "Bivariate Random Variables and Moment Generating Functions"
