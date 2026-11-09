@@ -90,6 +90,9 @@ lectures:
   - n: 7
     title: "Δισδιάστατες Τυχαίες Μεταβλητές και Ροπογεννήτριες"
     titleEn: "Bivariate Random Variables and Moment Generating Functions"
+    file: "lecture-07.pdf"
+    exercises: "exercises-07.pdf"
+    summary: "summary-07.pdf"
   - n: 8
     title: "Ανισότητες και Οριακά Θεωρήματα"
     titleEn: "Inequalities and Limit Theorems"
