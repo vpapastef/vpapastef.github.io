@@ -71,10 +71,13 @@
         const g = el('g', { tabindex: 0 });
         g.append(el('rect', { x: L + i * band, y: 0, width: band, height: 112, fill: 'transparent' })); // hover target: the whole column
         if (h > 0) {
+          // the year in progress: hatched, with a 1px outline drawn half a pixel inside the bar,
+          // so its top edge is as crisp as the solid bars and its width is the same
+          const d = i === last ? 0.5 : 0, bx = x + d, bt = top + d, bw = BAR - 2 * d, br = Math.max(0, rr - d);
           g.append(el('path', {
-            d: `M${x},${BASE}V${top + rr}Q${x},${top} ${x + rr},${top}H${x + BAR - rr}Q${x + BAR},${top} ${x + BAR},${top + rr}V${BASE}Z`,
-            class: 'bar ' + (i === last ? '' : 'fill-accent dark:fill-accent-dark'),
-            ...(i === last ? { fill: 'url(#cite-hatch)' } : {}),
+            d: `M${bx},${BASE}V${bt + br}Q${bx},${bt} ${bx + br},${bt}H${bx + bw - br}Q${bx + bw},${bt} ${bx + bw},${bt + br}V${BASE}Z`,
+            class: 'bar ' + (i === last ? 'stroke-accent dark:stroke-accent-dark' : 'fill-accent dark:fill-accent-dark'),
+            ...(i === last ? { fill: 'url(#cite-hatch)', 'stroke-width': 1 } : {}),
           }));
         }
         // hover or focus: a tooltip above the bar with the number centred on it; for the year in progress,
