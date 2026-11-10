@@ -210,7 +210,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         Read live on each visit: journal quartiles (best category) from <a href="https://www.scimagojr.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">SCImago Journal Rank</a>, citation counts from Scopus through PlumX.
       </p>
       <p id="scopus-summary" hidden class="mt-2 text-sm text-gray-700 dark:text-gray-300">
-        Scopus, papers below: <strong data-total></strong> citations, h-index <strong data-h></strong>
+        Totals: <strong data-total></strong> citations, h-index <strong data-h></strong> (Scopus)
       </p>
       <ol class="mt-4 list-decimal space-y-5 pl-5 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
         <li>
@@ -398,9 +398,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 <style is:global>
   a[data-sjr-id][hidden], a[data-scopus-doi][hidden] { display: none !important; } /* the inline-block classes would otherwise beat [hidden] */
-  /* fallback when the quartile can't be read: SCImago's widget (200×200, quartile square at x 0–69, y 50–119) cropped to the square, darkened so its white text shows */
-  .sjr-tile { display: inline-block; width: 24px; height: 24px; overflow: hidden; border-radius: 4px; flex: none; }
-  .sjr-tile img { width: 68.571px; height: 68.571px; max-width: none; margin-top: -17.143px; filter: brightness(.72) contrast(1.5) saturate(.85); }
+  /* fallback if the relay fails: SCImago's widget (200×200, quartile square at x 0–69, y 50–119) cropped to the square, darkened in dark mode */
+  .sjr-tile { width: 24px; height: 24px; overflow: hidden; border-radius: 4px; flex: none; }
+  .sjr-tile img { width: 68.571px; height: 68.571px; max-width: none; margin-top: -17.143px; }
+  .sjr-dim img { filter: brightness(.72) contrast(1.5) saturate(.85); }
 </style>
 
 <script>
@@ -439,12 +440,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
   // SCImago quartiles, read live: the widget image comes through images.weserv.nl, which adds the CORS
   // header SCImago's own server doesn't send, so the page may read the colour of the quartile square.
-  const PILL = 'inline-block rounded-full px-2.5 py-0.5 text-xs font-medium ';
+  const PILL = 'inline-block rounded-full px-2.5 py-0.5 text-xs font-medium hover:brightness-95 dark:hover:brightness-125 ';
   const QUARTILES: [string, number[], string][] = [
-    ['Q1', [164, 207, 99], 'bg-green-100 text-green-800 hover:bg-green-200 dark:bg-green-900/40 dark:text-green-300 dark:hover:bg-green-900/60'],
-    ['Q2', [232, 213, 89], 'bg-yellow-100 text-yellow-800 hover:bg-yellow-200 dark:bg-yellow-900/40 dark:text-yellow-300 dark:hover:bg-yellow-900/60'],
-    ['Q3', [251, 163, 83], 'bg-orange-100 text-orange-800 hover:bg-orange-200 dark:bg-orange-900/40 dark:text-orange-300 dark:hover:bg-orange-900/60'],
-    ['Q4', [221, 90, 78], 'bg-red-100 text-red-800 hover:bg-red-200 dark:bg-red-900/40 dark:text-red-300 dark:hover:bg-red-900/60'],
+    ['Q1', [164, 207, 99], 'bg-[#a4cf63] text-green-950 dark:bg-green-900/40 dark:text-green-300'],
+    ['Q2', [232, 213, 89], 'bg-[#e8d559] text-yellow-950 dark:bg-yellow-900/40 dark:text-yellow-300'],
+    ['Q3', [251, 163, 83], 'bg-[#fba353] text-orange-950 dark:bg-orange-900/40 dark:text-orange-300'],
+    ['Q4', [221, 90, 78], 'bg-[#dd5a4e] text-red-950 dark:bg-red-900/40 dark:text-red-300'],
   ];
   const widget = (id: string) => 'https://www.scimagojr.com/journal_img.php?id=' + id;
   function readQuartile(id: string): Promise<(typeof QUARTILES)[number] | null> {
@@ -470,19 +471,25 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(widget(id).replace('https://', '')) + '&maxage=1d';
     });
   }
+  // our own pill in both modes: SCImago's colours on a white page, a soft tint on a dark one;
+  // if the relay fails, SCImago's own square instead (darkened in dark mode, where its white text gets lost)
   document.querySelectorAll<HTMLAnchorElement>('a[data-sjr-id]').forEach(async (a) => {
     const q = await readQuartile(a.dataset.sjrId!);
     if (q) {
       a.className = PILL + q[2];
       a.textContent = q[0];
     } else {
-      // the relay failed: show SCImago's own image instead, still live
-      a.className = 'sjr-tile';
-      const img = document.createElement('img');
-      img.src = widget(a.dataset.sjrId!);
-      img.alt = a.title;
-      img.onerror = () => { a.hidden = true; };
-      a.replaceChildren(img);
+      a.className = 'inline-flex';
+      for (const cls of ['sjr-tile inline-block dark:hidden', 'sjr-tile sjr-dim hidden dark:inline-block']) {
+        const el = document.createElement('span');
+        el.className = cls;
+        const img = document.createElement('img');
+        img.src = widget(a.dataset.sjrId!);
+        img.alt = a.title;
+        img.onerror = () => { a.hidden = true; };
+        el.append(img);
+        a.append(el);
+      }
     }
     a.hidden = false;
   });
