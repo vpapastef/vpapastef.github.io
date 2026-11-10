@@ -1,5 +1,9 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import PaperEntry from '../components/PaperEntry.astro';
+import BookEntry from '../components/BookEntry.astro';
+import LiveMetrics from '../components/LiveMetrics.astro';
+import { books, journalArticles, conferencePapers } from '../data/publications';
 ---
 
 <BaseLayout title="CV" description="Curriculum Vitae of Vasilis Papastefanopoulos.">
@@ -169,36 +173,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         Books
       </h2>
       <ol class="mt-4 list-decimal space-y-5 pl-5 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-        <li>
-          Kotsiantis, S., <strong>Papastefanopoulos, V.</strong>, Tsihrintzis, G., &amp; Floros, A. (2026).
-          <a href="https://papazissi.gr/el/products/michaniki-mathisi-me-python" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark"><em>Μηχανική Μάθηση με Python</em></a>
-          <span class="text-gray-500 dark:text-gray-400">(Machine Learning with Python)</span>.
-          Εκδόσεις Παπαζήση.
-          <div class="mt-1 flex flex-wrap gap-2">
-            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">ISBN 978-960-02-4712-1</span>
-            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">Εύδοξος 153585239</span>
-          </div>
-        </li>
-        <li>
-          Verykios, V., Vasileiadis, V., Kotsiantis, S., <strong>Papastefanopoulos, V.</strong>, &amp; Tzagarakis, M. (2026).
-          <a href="https://www.dardanosnet.gr/product/vaseis-dedomenon/" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark"><em>Βάσεις Δεδομένων: Από τον Σχεδιασμό στις Εφαρμογές</em></a>
-          <span class="text-gray-500 dark:text-gray-400">(Databases: From Design to Applications)</span>.
-          Εκδόσεις Gutenberg.
-          <div class="mt-1 flex flex-wrap gap-2">
-            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">ISBN 978-960-01-2785-0</span>
-            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">Εύδοξος 153582139</span>
-          </div>
-        </li>
-        <li>
-          Verykios, V., Kotsiantis, S., <strong>Papastefanopoulos, V.</strong>, &amp; Tzagarakis, M. (2026).
-          <a href="https://newtech-pub.com/%CE%B2%CE%B9%CE%B2%CE%BB%CE%AF%CE%B1/%cf%80%ce%bb%ce%b7%cf%81%ce%bf%cf%86%ce%bf%cf%81%ce%b9%ce%ba%ce%ae/%ce%b3%ce%bb%cf%8e%cf%83%cf%83%ce%b5%cf%82-%cf%80%cf%81%ce%bf%ce%b3%cf%81%ce%b1%ce%bc%ce%bc%ce%b1%cf%84%ce%b9%cf%83%ce%bc%ce%bf%cf%8d/python-%ce%b5%ce%b9%cf%83%ce%b1%ce%b3%cf%89%ce%b3%ce%ae-%cf%83%cf%84%ce%bf%ce%bd-%cf%80%cf%81%ce%bf%ce%b3%cf%81%ce%b1%ce%bc%ce%bc%ce%b1%cf%84%ce%b9%cf%83%ce%bc%cf%8c/" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark"><em>Python: Εισαγωγή στον Προγραμματισμό</em></a>
-          <span class="text-gray-500 dark:text-gray-400">(Python: An Introduction to Programming)</span>.
-          Εκδόσεις Νέων Τεχνολογιών.
-          <div class="mt-1 flex flex-wrap gap-2">
-            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">ISBN 978-960-578-136-1</span>
-            <span class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400">Εύδοξος 153576086</span>
-          </div>
-        </li>
+        {books.map((book) => <BookEntry book={book} />)}
       </ol>
     </section>
 
@@ -207,90 +182,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         Publications
       </h2>
       <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
-        Read live on each visit: journal quartiles (best category) from <a href="https://www.scimagojr.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">SCImago Journal Rank</a>, citation counts from Scopus through PlumX.
+        Live journal quartiles (best category) from <a href="https://www.scimagojr.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">SCImago Journal Rank</a> and citation counts from <a href="https://www.elsevier.com/products/scopus" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">Scopus</a> through <a href="https://www.elsevier.com/insights/metrics/plumx" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">PlumX</a>. Citations per year and the list by type are on the <a href="/publications/" class="underline hover:text-accent dark:hover:text-accent-dark">Publications</a> page.
       </p>
       <p id="scopus-summary" hidden class="mt-2 text-sm text-gray-700 dark:text-gray-300">
         Totals: <strong data-total></strong> citations, h-index <strong data-h></strong> (Scopus)
       </p>
       <ol class="mt-4 list-decimal space-y-5 pl-5 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
-        <li>
-          <strong>Papastefanopoulos, V.</strong>, Linardatos, P., &amp; Kotsiantis, S. (2025).
-          <em>Combining normalizing flows with decision trees for interpretable unsupervised outlier detection</em>.
-          <em>Engineering Applications of Artificial Intelligence</em>, 141, 109770.
-          <a href="https://doi.org/10.1016/j.engappai.2024.109770" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
-          <div class="mt-1 flex flex-wrap items-center gap-2">
-            <a href="https://www.scimagojr.com/journalsearch.php?q=24182&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Engineering Applications of Artificial Intelligence: best quartile on SCImago" data-sjr-id="24182" hidden></a>
-            <a data-scopus-doi="10.1016/j.engappai.2024.109770" hidden target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"></a>
-          </div>
-        </li>
-        <li>
-          Linardatos, P., <strong>Papastefanopoulos, V.</strong>, &amp; Kotsiantis, S. (2024).
-          <em>Regressor cascading for time series forecasting</em>.
-          <em>Intelligent Decision Technologies</em>, 18(2), 1139-1156.
-          <a href="https://doi.org/10.3233/IDT-240224" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
-          <div class="mt-1 flex flex-wrap items-center gap-2">
-            <a href="https://www.scimagojr.com/journalsearch.php?q=21100211724&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Intelligent Decision Technologies: best quartile on SCImago" data-sjr-id="21100211724" hidden></a>
-            <a data-scopus-doi="10.3233/IDT-240224" hidden target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"></a>
-          </div>
-        </li>
-        <li>
-          Linardatos, P., <strong>Papastefanopoulos, V.</strong>, Panagiotakopoulos, T., &amp; Kotsiantis, S. (2023).
-          <em>CO<sub>2</sub> concentration forecasting in smart cities using a hybrid ARIMA-TFT model on multivariate time series IoT data</em>.
-          <em>Scientific Reports</em>, 13(1), 17266.
-          <a href="https://doi.org/10.1038/s41598-023-42346-0" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
-          <div class="mt-1 flex flex-wrap items-center gap-2">
-            <a href="https://www.scimagojr.com/journalsearch.php?q=21100200805&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Scientific Reports: best quartile on SCImago" data-sjr-id="21100200805" hidden></a>
-            <a data-scopus-doi="10.1038/s41598-023-42346-0" hidden target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"></a>
-          </div>
-        </li>
-        <li>
-          <strong>Papastefanopoulos, V.</strong>, Linardatos, P., Panagiotakopoulos, T., &amp; Kotsiantis, S. (2023).
-          <em>Multivariate time-series forecasting: A review of deep learning methods in internet of things applications to smart cities</em>.
-          <em>Smart Cities</em>, 6(5), 2519-2552.
-          <a href="https://doi.org/10.3390/smartcities6050114" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
-          <div class="mt-1 flex flex-wrap items-center gap-2">
-            <a href="https://www.scimagojr.com/journalsearch.php?q=21101068929&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Smart Cities: best quartile on SCImago" data-sjr-id="21101068929" hidden></a>
-            <a data-scopus-doi="10.3390/smartcities6050114" hidden target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"></a>
-            <a href="https://www.mdpi.com/about/announcements/11391" target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 hover:bg-amber-200 dark:hover:bg-amber-900/50">Best Paper Award</a>
-          </div>
-        </li>
-        <li>
-          <strong>Papastefanopoulos, V.</strong>, Linardatos, P., &amp; Kotsiantis, S. (2021).
-          <em>Unsupervised outlier detection: A meta-learning algorithm based on feature selection</em>.
-          <em>Electronics</em>, 10(18), 2236.
-          <a href="https://doi.org/10.3390/electronics10182236" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
-          <div class="mt-1 flex flex-wrap items-center gap-2">
-            <a href="https://www.scimagojr.com/journalsearch.php?q=21100829272&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Electronics: best quartile on SCImago" data-sjr-id="21100829272" hidden></a>
-            <a data-scopus-doi="10.3390/electronics10182236" hidden target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"></a>
-          </div>
-        </li>
-        <li>
-          Linardatos, P., <strong>Papastefanopoulos, V.</strong>, &amp; Kotsiantis, S. (2020).
-          <em>Explainable AI: A review of machine learning interpretability methods</em>.
-          <em>Entropy</em>, 23(1), 18.
-          <a href="https://doi.org/10.3390/e23010018" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
-          <div class="mt-1 flex flex-wrap items-center gap-2">
-            <a href="https://www.scimagojr.com/journalsearch.php?q=13715&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Entropy: best quartile on SCImago" data-sjr-id="13715" hidden></a>
-            <a data-scopus-doi="10.3390/e23010018" hidden target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"></a>
-            <a href="https://www.mdpi.com/journal/entropy/most_cited" target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 hover:bg-amber-200 dark:hover:bg-amber-900/50">Most Cited Paper in Entropy</a>
-          </div>
-        </li>
-        <li>
-          <strong>Papastefanopoulos, V.</strong>, Linardatos, P., &amp; Kotsiantis, S. (2020).
-          <em>COVID-19: A comparison of time series methods to forecast percentage of active cases per population</em>.
-          <em>Applied Sciences</em>, 10(11), 3880.
-          <a href="https://doi.org/10.3390/app10113880" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
-          <div class="mt-1 flex flex-wrap items-center gap-2">
-            <a href="https://www.scimagojr.com/journalsearch.php?q=21100829268&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Applied Sciences: best quartile on SCImago" data-sjr-id="21100829268" hidden></a>
-            <a data-scopus-doi="10.3390/app10113880" hidden target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"></a>
-          </div>
-        </li>
-        <li>
-          <strong>Papastefanopoulos, V.</strong>, Karlos, S., &amp; Kotsiantis, S. (2017).
-          <em>Using Semi-Supervised Learning Methods for Credit Score Problem</em>.
-          <em>Advances in Smart Systems Research</em> (Conference Paper), 6(2), 28-40.
-          <a href="http://nimbusvault.net/publications/koala/assr/papers/k17is-222.pdf" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">PDF</a>
-        </li>
+        {[...journalArticles, ...conferencePapers].map((paper) => <PaperEntry paper={paper} />)}
       </ol>
     </section>
 
@@ -396,101 +294,4 @@ import BaseLayout from '../layouts/BaseLayout.astro';
   </div>
 </BaseLayout>
 
-<style is:global>
-  a[data-sjr-id][hidden], a[data-scopus-doi][hidden] { display: none !important; } /* the inline-block classes would otherwise beat [hidden] */
-  /* fallback if the relay fails: SCImago's widget (200×200, quartile square at x 0–69, y 50–119) cropped to the square, darkened in dark mode */
-  .sjr-tile { width: 24px; height: 24px; overflow: hidden; border-radius: 4px; flex: none; }
-  .sjr-tile img { width: 68.571px; height: 68.571px; max-width: none; margin-top: -17.143px; }
-  .sjr-dim img { filter: brightness(.72) contrast(1.5) saturate(.85); }
-</style>
-
-<script>
-  // Scopus citation counts, read live from PlumX on each visit; nothing is shown if a request fails
-  const fmt = new Intl.NumberFormat('en-US');
-  const badges = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-scopus-doi]'));
-  async function scopus(a: HTMLAnchorElement): Promise<number | null> {
-    const doi = a.dataset.scopusDoi!;
-    const url = 'https://api.plu.mx/widget/other/artifact?type=doi&id=' + encodeURIComponent(doi) +
-      '&href=' + encodeURIComponent('https://plu.mx/plum/a/?doi=' + doi);
-    try {
-      const r = await fetch(url);
-      if (!r.ok) return null;
-      const j = await r.json();
-      const c = (j?.statistics?.Citations ?? []).find((x: { source?: string }) => x.source === 'Scopus');
-      const n = Number(c?.count ?? 0);
-      if (n > 0) {
-        a.textContent = fmt.format(n) + (n === 1 ? ' citation' : ' citations');
-        a.href = 'https://plu.mx/plum/a/?doi=' + encodeURIComponent(doi); // free page, no Scopus sign-in
-        a.hidden = false;
-      }
-      return n;
-    } catch {
-      return null;
-    }
-  }
-  (async () => {
-    const counts = await Promise.all(badges.map(scopus));
-    if (!counts.length || counts.some((n) => n === null)) return; // a partial total would mislead
-    const sorted = (counts as number[]).slice().sort((x, y) => y - x);
-    const box = document.getElementById('scopus-summary')!;
-    box.querySelector('[data-total]')!.textContent = fmt.format(sorted.reduce((x, y) => x + y, 0));
-    box.querySelector('[data-h]')!.textContent = String(sorted.filter((n, i) => n >= i + 1).length);
-    box.hidden = false;
-  })();
-
-  // SCImago quartiles, read live: the widget image comes through images.weserv.nl, which adds the CORS
-  // header SCImago's own server doesn't send, so the page may read the colour of the quartile square.
-  const PILL = 'inline-block rounded-full px-2.5 py-0.5 text-xs font-medium hover:brightness-95 dark:hover:brightness-125 ';
-  const QUARTILES: [string, number[], string][] = [
-    ['Q1', [164, 207, 99], 'bg-[#a4cf63] text-green-950 dark:bg-green-900/40 dark:text-green-300'],
-    ['Q2', [232, 213, 89], 'bg-[#e8d559] text-yellow-950 dark:bg-yellow-900/40 dark:text-yellow-300'],
-    ['Q3', [251, 163, 83], 'bg-[#fba353] text-orange-950 dark:bg-orange-900/40 dark:text-orange-300'],
-    ['Q4', [221, 90, 78], 'bg-[#dd5a4e] text-red-950 dark:bg-red-900/40 dark:text-red-300'],
-  ];
-  const widget = (id: string) => 'https://www.scimagojr.com/journal_img.php?id=' + id;
-  function readQuartile(id: string): Promise<(typeof QUARTILES)[number] | null> {
-    return new Promise((resolve) => {
-      const img = new Image();
-      img.crossOrigin = 'anonymous';
-      img.onload = () => {
-        try {
-          const c = document.createElement('canvas');
-          c.width = c.height = 10;
-          const ctx = c.getContext('2d')!;
-          ctx.drawImage(img, 2, 52, 10, 10, 0, 0, 10, 10); // a corner of the square, clear of the text
-          const d = ctx.getImageData(0, 0, 10, 10).data;
-          const rgb = [0, 1, 2].map((k) => { let t = 0; for (let i = k; i < d.length; i += 4) t += d[i]; return t / 100; });
-          const dist = (q: number[]) => Math.hypot(...q.map((v, k) => v - rgb[k]));
-          const best = QUARTILES.reduce((x, y) => (dist(y[1]) < dist(x[1]) ? y : x));
-          resolve(dist(best[1]) < 40 ? best : null);
-        } catch {
-          resolve(null);
-        }
-      };
-      img.onerror = () => resolve(null);
-      img.src = 'https://images.weserv.nl/?url=' + encodeURIComponent(widget(id).replace('https://', '')) + '&maxage=1d';
-    });
-  }
-  // our own pill in both modes: SCImago's colours on a white page, a soft tint on a dark one;
-  // if the relay fails, SCImago's own square instead (darkened in dark mode, where its white text gets lost)
-  document.querySelectorAll<HTMLAnchorElement>('a[data-sjr-id]').forEach(async (a) => {
-    const q = await readQuartile(a.dataset.sjrId!);
-    if (q) {
-      a.className = PILL + q[2];
-      a.textContent = q[0];
-    } else {
-      a.className = 'inline-flex';
-      for (const cls of ['sjr-tile inline-block dark:hidden', 'sjr-tile sjr-dim hidden dark:inline-block']) {
-        const el = document.createElement('span');
-        el.className = cls;
-        const img = document.createElement('img');
-        img.src = widget(a.dataset.sjrId!);
-        img.alt = a.title;
-        img.onerror = () => { a.hidden = true; };
-        el.append(img);
-        a.append(el);
-      }
-    }
-    a.hidden = false;
-  });
-</script>
+<LiveMetrics />

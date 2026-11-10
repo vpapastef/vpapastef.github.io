@@ -1,0 +1,35 @@
+---
+// One paper as a list item: authors (mine in bold), title, venue, DOI, then the badge row
+// (live SCImago quartile, live Scopus citations, awards), filled by LiveMetrics.astro.
+import { ME, type Paper } from '../data/publications';
+
+interface Props {
+  paper: Paper;
+}
+const { paper } = Astro.props;
+const LINK = 'underline hover:text-accent dark:hover:text-accent-dark';
+const GREY_PILL = 'inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700';
+const AWARD_PILL = 'inline-block rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 hover:bg-amber-200 dark:hover:bg-amber-900/50';
+const last = paper.authors.length - 1;
+---
+
+<li>
+  {paper.authors.map((a, i) => (
+    <Fragment>{i > 0 && (i === last ? ', & ' : ', ')}{a === ME ? <strong>{a}</strong> : a}</Fragment>
+  ))} ({paper.year}).
+  <em set:html={paper.title} />.
+  <em>{paper.venue}</em>{paper.venueNote && ` (${paper.venueNote})`}, {paper.details}.
+  {paper.doi && <a href={`https://doi.org/${paper.doi}`} target="_blank" rel="noopener noreferrer" class={LINK}>DOI</a>}
+  {paper.link && <a href={paper.link.href} target="_blank" rel="noopener noreferrer" class={LINK}>{paper.link.label}</a>}
+  {(paper.sjr || paper.doi || paper.awards) && (
+    <div class="mt-1 flex flex-wrap items-center gap-2">
+      {paper.sjr && (
+        <a href={`https://www.scimagojr.com/journalsearch.php?q=${paper.sjr}&tip=sid`} target="_blank" rel="noopener noreferrer" title={`${paper.venue}: best quartile on SCImago`} data-sjr-id={paper.sjr} hidden></a>
+      )}
+      {paper.doi && <a data-scopus-doi={paper.doi} hidden target="_blank" rel="noopener noreferrer" class={GREY_PILL}></a>}
+      {paper.awards?.map((b) => (
+        <a href={b.href} target="_blank" rel="noopener noreferrer" class={AWARD_PILL}>{b.label}</a>
+      ))}
+    </div>
+  )}
+</li>

@@ -1,0 +1,59 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PaperEntry from '../components/PaperEntry.astro';
+import BookEntry from '../components/BookEntry.astro';
+import LiveMetrics from '../components/LiveMetrics.astro';
+import CitationsChart from '../components/CitationsChart.astro';
+import { books, journalArticles, conferencePapers } from '../data/publications';
+
+const LINK = 'underline hover:text-accent dark:hover:text-accent-dark';
+const H2 = 'text-sm font-semibold uppercase tracking-wider text-gray-500 dark:text-gray-400';
+const OL = 'mt-4 list-decimal space-y-5 pl-5 text-sm text-gray-700 dark:text-gray-300 leading-relaxed';
+---
+
+<BaseLayout title="Publications" description="Journal articles, books and conference papers by Vasilis Papastefanopoulos.">
+  <h1 class="text-3xl font-bold tracking-tight text-gray-900 dark:text-gray-100 sm:text-4xl">
+    Publications
+  </h1>
+
+  <nav aria-label="Publication types" class="mt-4 flex flex-wrap gap-x-3 gap-y-1 text-sm text-gray-500 dark:text-gray-400">
+    <a href="#journal-articles" class="hover:text-accent dark:hover:text-accent-dark">Journal articles</a><span>·</span>
+    <a href="#conference-papers" class="hover:text-accent dark:hover:text-accent-dark">Conference papers</a><span>·</span>
+    <a href="#books" class="hover:text-accent dark:hover:text-accent-dark">Books</a>
+  </nav>
+
+  <section class="mt-8">
+    <p id="scopus-summary" hidden class="text-sm text-gray-700 dark:text-gray-300">
+      Totals: <strong data-total></strong> citations, h-index <strong data-h></strong> (Scopus)
+    </p>
+    <CitationsChart />
+  </section>
+
+  <div class="mt-10 space-y-12">
+    <section id="journal-articles" class="scroll-mt-8">
+      <h2 class={H2}>Journal articles</h2>
+      <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
+        Live journal quartiles (best category) from <a href="https://www.scimagojr.com/" target="_blank" rel="noopener noreferrer" class={LINK}>SCImago Journal Rank</a> and citation counts from <a href="https://www.elsevier.com/products/scopus" target="_blank" rel="noopener noreferrer" class={LINK}>Scopus</a> through <a href="https://www.elsevier.com/insights/metrics/plumx" target="_blank" rel="noopener noreferrer" class={LINK}>PlumX</a>.
+      </p>
+      <ol class={OL}>
+        {journalArticles.map((paper) => <PaperEntry paper={paper} />)}
+      </ol>
+    </section>
+
+    <section id="conference-papers" class="scroll-mt-8">
+      <h2 class={H2}>Conference papers</h2>
+      <ol class={OL}>
+        {conferencePapers.map((paper) => <PaperEntry paper={{ ...paper, venueNote: undefined }} />)}
+      </ol>
+    </section>
+
+    <section id="books" class="scroll-mt-8">
+      <h2 class={H2}>Books</h2>
+      <ol class={OL}>
+        {books.map((book) => <BookEntry book={book} />)}
+      </ol>
+    </section>
+  </div>
+</BaseLayout>
+
+<LiveMetrics />

@@ -1,0 +1,110 @@
+---
+// Citations per year, read live from OpenAlex on each visit; hidden if the request fails.
+---
+
+<figure id="cites-chart" hidden class="relative mt-3 max-w-sm">
+  <figcaption class="text-xs text-gray-500 dark:text-gray-400">
+    Citations per year (<a href="https://openalex.org/" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">OpenAlex</a>)
+  </figcaption>
+  <svg viewBox="0 0 320 112" class="mt-1 w-full" role="img" aria-labelledby="cites-chart-title">
+    <title id="cites-chart-title">Citations per year, from OpenAlex</title>
+  </svg>
+  <div data-tip hidden class="pointer-events-none absolute z-10 whitespace-nowrap rounded-md border border-gray-200 bg-white px-2 py-1 text-xs text-gray-700 shadow-sm dark:border-gray-700 dark:bg-gray-900 dark:text-gray-200"></div>
+  <table class="sr-only"><thead><tr><th>Year</th><th>Citations</th></tr></thead><tbody></tbody></table>
+</figure>
+
+<style is:global>
+  #cites-chart g:hover .bar, #cites-chart g:focus .bar { filter: brightness(.85); }
+  .dark #cites-chart g:hover .bar, .dark #cites-chart g:focus .bar { filter: brightness(1.2); }
+  #cites-chart g:focus { outline: none; }
+</style>
+
+<script>
+  const fmt = new Intl.NumberFormat('en-US');
+  // Citations per year, read live from OpenAlex (the only free per-year source); hidden if the request fails
+  (async () => {
+    const fig = document.getElementById('cites-chart');
+    if (!fig) return;
+    try {
+      const r = await fetch('https://api.openalex.org/authors/orcid:0000-0001-8169-1373?select=counts_by_year');
+      if (!r.ok) return;
+      const j = await r.json();
+      const by = new Map<number, number>((j.counts_by_year ?? []).map((x: { year: number; cited_by_count: number }) => [x.year, x.cited_by_count]));
+      const now = new Date().getFullYear();
+      const FIRST = 2020; // first journal paper; OpenAlex also lists a stray 2013 citation
+      const years = Array.from({ length: now - FIRST + 1 }, (_, i) => FIRST + i);
+      const vals = years.map((y) => by.get(y) ?? 0);
+      if (!vals.some((v) => v > 0)) return;
+      const NS = 'http://www.w3.org/2000/svg';
+      const svg = fig.querySelector('svg')!;
+      const tip = fig.querySelector<HTMLElement>('[data-tip]')!;
+      const el = (tag: string, attrs: Record<string, string | number>, text?: string) => {
+        const e = document.createElementNS(NS, tag);
+        for (const [k, v] of Object.entries(attrs)) e.setAttribute(k, String(v));
+        if (text !== undefined) e.textContent = text;
+        return e;
+      };
+      const W = 320, L = 34, TOP = 12, BASE = 92; // L: room for the y-axis labels
+      // y axis: about four steps of 1, 2, 2.5 or 5 × a power of ten, topped at a whole step
+      const peak = Math.max(...vals), raw = peak / 4, mag = 10 ** Math.floor(Math.log10(raw));
+      const step = [1, 2, 2.5, 5, 10].map((m) => m * mag).find((t) => t >= raw)!;
+      const yMax = Math.ceil(peak / step) * step;
+      const yOf = (v: number) => BASE - (v / yMax) * (BASE - TOP);
+      // one bar per year up to the visitor's current year, which is hatched as in progress;
+      // on 1 January a new year's bar appears and the previous one turns solid
+      const band = (W - L) / years.length, last = years.length - 1;
+      const BAR = Math.min(24, band * 0.7); // thinner bars once more years are on the axis
+      const defs = el('defs', {});
+      const pat = el('pattern', { id: 'cite-hatch', patternUnits: 'userSpaceOnUse', width: 4, height: 4, patternTransform: 'rotate(45)' });
+      pat.append(el('rect', { width: 2, height: 4, class: 'fill-accent dark:fill-accent-dark' }));
+      defs.append(pat);
+      svg.append(defs);
+      for (let t = 0; t <= yMax; t += step) {
+        const yy = Math.round(yOf(t)) + 0.5; // hairlines on the pixel grid
+        svg.append(el('line', { x1: L, x2: W, y1: yy, y2: yy, 'stroke-width': 1,
+          class: t === 0 ? 'stroke-gray-300 dark:stroke-gray-700' : 'stroke-gray-100 dark:stroke-gray-800' }));
+        svg.append(el('text', { x: L - 6, y: yy + 3.5, 'text-anchor': 'end', 'font-size': 10, class: 'fill-gray-500 dark:fill-gray-400' }, fmt.format(t)));
+      }
+      years.forEach((y, i) => {
+        const v = vals[i], top = yOf(v), h = BASE - top;
+        const x = L + i * band + (band - BAR) / 2, rr = Math.min(4, h);
+        const g = el('g', { tabindex: 0 });
+        g.append(el('rect', { x: L + i * band, y: 0, width: band, height: 112, fill: 'transparent' })); // hover target: the whole column
+        if (h > 0) {
+          g.append(el('path', {
+            d: `M${x},${BASE}V${top + rr}Q${x},${top} ${x + rr},${top}H${x + BAR - rr}Q${x + BAR},${top} ${x + BAR},${top + rr}V${BASE}Z`,
+            class: 'bar ' + (i === last ? '' : 'fill-accent dark:fill-accent-dark'),
+            ...(i === last ? { fill: 'url(#cite-hatch)' } : {}),
+          }));
+        }
+        // hover or focus: a tooltip above the bar with the number centred on it; for the year in progress,
+        // «(in progress)» runs on to the right, past the chart, so the box doesn't cover the other bars
+        const show = () => {
+          const num = document.createElement('span');
+          num.textContent = fmt.format(v);
+          tip.replaceChildren(num);
+          if (i === last) tip.append(' (in progress)');
+          tip.hidden = false;
+          const f = fig.getBoundingClientRect(), s = svg.getBoundingClientRect(), k = s.width / W;
+          const cx = s.left - f.left + (x + BAR / 2) * k, ty = s.top - f.top + top * k;
+          const pad = parseFloat(getComputedStyle(tip).paddingLeft) + parseFloat(getComputedStyle(tip).borderLeftWidth);
+          const room = document.documentElement.clientWidth - 8 - f.left; // keep it on the screen on a phone
+          const left = Math.max(-f.left + 8, Math.min(room - tip.offsetWidth, cx - pad - num.offsetWidth / 2));
+          tip.style.left = left + 'px';
+          tip.style.top = (ty - tip.offsetHeight - 6) + 'px';
+        };
+        const hide = () => { tip.hidden = true; };
+        g.addEventListener('pointerenter', show);
+        g.addEventListener('pointerleave', hide);
+        g.addEventListener('focus', show);
+        g.addEventListener('blur', hide);
+        g.append(el('text', { x: x + BAR / 2, y: 106, 'text-anchor': 'middle', 'font-size': 10, class: 'fill-gray-500 dark:fill-gray-400' }, String(y)));
+        svg.append(g);
+      });
+      fig.querySelector('tbody')!.innerHTML = years.map((y, i) => `<tr><td>${y}${i === last ? ' (in progress)' : ''}</td><td>${vals[i]}</td></tr>`).join('');
+      fig.hidden = false;
+    } catch {
+      /* leave the chart hidden */
+    }
+  })();
+</script>

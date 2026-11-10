@@ -1,0 +1,24 @@
+---
+// One book as a list item: authors (mine in bold), Greek title with its English translation, publisher, ISBN and Εύδοξος code.
+import { ME, type Book } from '../data/publications';
+
+interface Props {
+  book: Book;
+}
+const { book } = Astro.props;
+const PILL = 'inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400';
+const last = book.authors.length - 1;
+---
+
+<li>
+  {book.authors.map((a, i) => (
+    <Fragment>{i > 0 && (i === last ? ', & ' : ', ')}{a === ME ? <strong>{a}</strong> : a}</Fragment>
+  ))} ({book.year}).
+  <a href={book.url} target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark"><em>{book.title}</em></a>
+  <span class="text-gray-500 dark:text-gray-400">({book.titleEn})</span>.
+  {book.publisher}.
+  <div class="mt-1 flex flex-wrap gap-2">
+    <span class={PILL}>ISBN {book.isbn}</span>
+    <span class={PILL}>Εύδοξος {book.eudoxus}</span>
+  </div>
+</li>
