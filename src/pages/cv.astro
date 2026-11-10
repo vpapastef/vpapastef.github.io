@@ -207,7 +207,10 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         Publications
       </h2>
       <p class="mt-2 text-xs text-gray-500 dark:text-gray-400">
-        Journal quartiles are <a href="https://www.scimagojr.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">SCImago Journal Rank</a> (SJR) 2025.
+        Read live on each visit: journal quartiles (best category) from <a href="https://www.scimagojr.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">SCImago Journal Rank</a>, citation counts from Scopus through PlumX.
+      </p>
+      <p id="scopus-summary" hidden class="mt-2 text-sm text-gray-700 dark:text-gray-300">
+        <a href="https://www.scopus.com/authid/detail.uri?authorId=57217080632" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">Scopus</a>, papers below: <strong data-total></strong> citations, h-index <strong data-h></strong>
       </p>
       <ol class="mt-4 list-decimal space-y-5 pl-5 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
         <li>
@@ -215,8 +218,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <em>Combining normalizing flows with decision trees for interpretable unsupervised outlier detection</em>.
           <em>Engineering Applications of Artificial Intelligence</em>, 141, 109770.
           <a href="https://doi.org/10.1016/j.engappai.2024.109770" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
-          <div class="mt-1 flex flex-wrap gap-2">
-            <a href="https://www.scimagojr.com/journalsearch.php?q=24182&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Engineering Applications of Artificial Intelligence on SCImago (SJR 2025)" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">Q1</a>
+          <div class="mt-1 flex flex-wrap items-center gap-2">
+            <a href="https://www.scimagojr.com/journalsearch.php?q=24182&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Engineering Applications of Artificial Intelligence: best quartile on SCImago" class="sjr-tile"><img src="https://www.scimagojr.com/journal_img.php?id=24182" alt="SCImago quartile of Engineering Applications of Artificial Intelligence" width="200" height="200" loading="lazy" onerror="this.parentElement.hidden=true" /></a>
+            <a data-scopus-doi="10.1016/j.engappai.2024.109770" hidden target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"></a>
           </div>
         </li>
         <li>
@@ -224,8 +228,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <em>Regressor cascading for time series forecasting</em>.
           <em>Intelligent Decision Technologies</em>, 18(2), 1139-1156.
           <a href="https://doi.org/10.3233/IDT-240224" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
-          <div class="mt-1 flex flex-wrap gap-2">
-            <a href="https://www.scimagojr.com/journalsearch.php?q=21100211724&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Intelligent Decision Technologies on SCImago (SJR 2025)" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">Q3</a>
+          <div class="mt-1 flex flex-wrap items-center gap-2">
+            <a href="https://www.scimagojr.com/journalsearch.php?q=21100211724&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Intelligent Decision Technologies: best quartile on SCImago" class="sjr-tile"><img src="https://www.scimagojr.com/journal_img.php?id=21100211724" alt="SCImago quartile of Intelligent Decision Technologies" width="200" height="200" loading="lazy" onerror="this.parentElement.hidden=true" /></a>
+            <a data-scopus-doi="10.3233/IDT-240224" hidden target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"></a>
           </div>
         </li>
         <li>
@@ -233,8 +238,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <em>CO<sub>2</sub> concentration forecasting in smart cities using a hybrid ARIMA-TFT model on multivariate time series IoT data</em>.
           <em>Scientific Reports</em>, 13(1), 17266.
           <a href="https://doi.org/10.1038/s41598-023-42346-0" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
-          <div class="mt-1 flex flex-wrap gap-2">
-            <a href="https://www.scimagojr.com/journalsearch.php?q=21100200805&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Scientific Reports on SCImago (SJR 2025)" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">Q1</a>
+          <div class="mt-1 flex flex-wrap items-center gap-2">
+            <a href="https://www.scimagojr.com/journalsearch.php?q=21100200805&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Scientific Reports: best quartile on SCImago" class="sjr-tile"><img src="https://www.scimagojr.com/journal_img.php?id=21100200805" alt="SCImago quartile of Scientific Reports" width="200" height="200" loading="lazy" onerror="this.parentElement.hidden=true" /></a>
+            <a data-scopus-doi="10.1038/s41598-023-42346-0" hidden target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"></a>
           </div>
         </li>
         <li>
@@ -242,8 +248,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <em>Multivariate time-series forecasting: A review of deep learning methods in internet of things applications to smart cities</em>.
           <em>Smart Cities</em>, 6(5), 2519-2552.
           <a href="https://doi.org/10.3390/smartcities6050114" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
-          <div class="mt-1 flex flex-wrap gap-2">
-            <a href="https://www.scimagojr.com/journalsearch.php?q=21101068929&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Smart Cities on SCImago (SJR 2025)" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">Q1</a>
+          <div class="mt-1 flex flex-wrap items-center gap-2">
+            <a href="https://www.scimagojr.com/journalsearch.php?q=21101068929&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Smart Cities: best quartile on SCImago" class="sjr-tile"><img src="https://www.scimagojr.com/journal_img.php?id=21101068929" alt="SCImago quartile of Smart Cities" width="200" height="200" loading="lazy" onerror="this.parentElement.hidden=true" /></a>
+            <a data-scopus-doi="10.3390/smartcities6050114" hidden target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"></a>
             <a href="https://www.mdpi.com/about/announcements/11391" target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 hover:bg-amber-200 dark:hover:bg-amber-900/50">Best Paper Award</a>
           </div>
         </li>
@@ -252,8 +259,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <em>Unsupervised outlier detection: A meta-learning algorithm based on feature selection</em>.
           <em>Electronics</em>, 10(18), 2236.
           <a href="https://doi.org/10.3390/electronics10182236" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
-          <div class="mt-1 flex flex-wrap gap-2">
-            <a href="https://www.scimagojr.com/journalsearch.php?q=21100829272&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Electronics on SCImago (SJR 2025)" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">Q2</a>
+          <div class="mt-1 flex flex-wrap items-center gap-2">
+            <a href="https://www.scimagojr.com/journalsearch.php?q=21100829272&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Electronics: best quartile on SCImago" class="sjr-tile"><img src="https://www.scimagojr.com/journal_img.php?id=21100829272" alt="SCImago quartile of Electronics" width="200" height="200" loading="lazy" onerror="this.parentElement.hidden=true" /></a>
+            <a data-scopus-doi="10.3390/electronics10182236" hidden target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"></a>
           </div>
         </li>
         <li>
@@ -261,8 +269,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <em>Explainable AI: A review of machine learning interpretability methods</em>.
           <em>Entropy</em>, 23(1), 18.
           <a href="https://doi.org/10.3390/e23010018" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
-          <div class="mt-1 flex flex-wrap gap-2">
-            <a href="https://www.scimagojr.com/journalsearch.php?q=13715&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Entropy on SCImago (SJR 2025)" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">Q2</a>
+          <div class="mt-1 flex flex-wrap items-center gap-2">
+            <a href="https://www.scimagojr.com/journalsearch.php?q=13715&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Entropy: best quartile on SCImago" class="sjr-tile"><img src="https://www.scimagojr.com/journal_img.php?id=13715" alt="SCImago quartile of Entropy" width="200" height="200" loading="lazy" onerror="this.parentElement.hidden=true" /></a>
+            <a data-scopus-doi="10.3390/e23010018" hidden target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"></a>
             <a href="https://www.mdpi.com/journal/entropy/most_cited" target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-amber-100 px-2.5 py-0.5 text-xs font-medium text-amber-800 dark:bg-amber-900/30 dark:text-amber-300 hover:bg-amber-200 dark:hover:bg-amber-900/50">Most Cited Paper in Entropy</a>
           </div>
         </li>
@@ -271,8 +280,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
           <em>COVID-19: A comparison of time series methods to forecast percentage of active cases per population</em>.
           <em>Applied Sciences</em>, 10(11), 3880.
           <a href="https://doi.org/10.3390/app10113880" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">DOI</a>
-          <div class="mt-1 flex flex-wrap gap-2">
-            <a href="https://www.scimagojr.com/journalsearch.php?q=21100829268&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Applied Sciences on SCImago (SJR 2025)" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700">Q2</a>
+          <div class="mt-1 flex flex-wrap items-center gap-2">
+            <a href="https://www.scimagojr.com/journalsearch.php?q=21100829268&amp;tip=sid" target="_blank" rel="noopener noreferrer" title="Applied Sciences: best quartile on SCImago" class="sjr-tile"><img src="https://www.scimagojr.com/journal_img.php?id=21100829268" alt="SCImago quartile of Applied Sciences" width="200" height="200" loading="lazy" onerror="this.parentElement.hidden=true" /></a>
+            <a data-scopus-doi="10.3390/app10113880" hidden target="_blank" rel="noopener noreferrer" class="inline-block rounded-full bg-gray-100 px-2.5 py-0.5 text-xs font-medium text-gray-600 dark:bg-gray-800 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700"></a>
           </div>
         </li>
         <li>
@@ -385,3 +395,45 @@ import BaseLayout from '../layouts/BaseLayout.astro';
     </section>
   </div>
 </BaseLayout>
+
+<style>
+  /* SCImago's widget is 200×200 with the quartile square at x 0–69, y 50–119; show only that square, 24px */
+  .sjr-tile { display: inline-block; width: 24px; height: 24px; overflow: hidden; border-radius: 4px; flex: none; }
+  .sjr-tile[hidden], a[data-scopus-doi][hidden] { display: none !important; } /* the inline-block classes would otherwise beat [hidden] */
+  .sjr-tile img { width: 68.571px; height: 68.571px; max-width: none; margin-top: -17.143px; }
+</style>
+
+<script>
+  // Scopus citation counts, read live from PlumX on each visit; nothing is shown if a request fails
+  const fmt = new Intl.NumberFormat('en-US');
+  const badges = Array.from(document.querySelectorAll<HTMLAnchorElement>('[data-scopus-doi]'));
+  async function scopus(a: HTMLAnchorElement): Promise<number | null> {
+    const doi = a.dataset.scopusDoi!;
+    const url = 'https://api.plu.mx/widget/other/artifact?type=doi&id=' + encodeURIComponent(doi) +
+      '&href=' + encodeURIComponent('https://plu.mx/plum/a/?doi=' + doi);
+    try {
+      const r = await fetch(url);
+      if (!r.ok) return null;
+      const j = await r.json();
+      const c = (j?.statistics?.Citations ?? []).find((x: { source?: string }) => x.source === 'Scopus');
+      const n = Number(c?.count ?? 0);
+      if (n > 0) {
+        a.textContent = 'Scopus: ' + fmt.format(n) + (n === 1 ? ' citation' : ' citations');
+        a.href = c.link || 'https://plu.mx/plum/a/?doi=' + doi;
+        a.hidden = false;
+      }
+      return n;
+    } catch {
+      return null;
+    }
+  }
+  (async () => {
+    const counts = await Promise.all(badges.map(scopus));
+    if (!counts.length || counts.some((n) => n === null)) return; // a partial total would mislead
+    const sorted = (counts as number[]).slice().sort((x, y) => y - x);
+    const box = document.getElementById('scopus-summary')!;
+    box.querySelector('[data-total]')!.textContent = fmt.format(sorted.reduce((x, y) => x + y, 0));
+    box.querySelector('[data-h]')!.textContent = String(sorted.filter((n, i) => n >= i + 1).length);
+    box.hidden = false;
+  })();
+</script>
