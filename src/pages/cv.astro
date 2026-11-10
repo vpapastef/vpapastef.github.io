@@ -210,7 +210,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
         Read live on each visit: journal quartiles (best category) from <a href="https://www.scimagojr.com/" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">SCImago Journal Rank</a>, citation counts from Scopus through PlumX.
       </p>
       <p id="scopus-summary" hidden class="mt-2 text-sm text-gray-700 dark:text-gray-300">
-        <a href="https://www.scopus.com/authid/detail.uri?authorId=57217080632" target="_blank" rel="noopener noreferrer" class="underline hover:text-accent dark:hover:text-accent-dark">Scopus</a>, papers below: <strong data-total></strong> citations, h-index <strong data-h></strong>
+        Scopus, papers below: <strong data-total></strong> citations, h-index <strong data-h></strong>
       </p>
       <ol class="mt-4 list-decimal space-y-5 pl-5 text-sm text-gray-700 dark:text-gray-300 leading-relaxed">
         <li>
@@ -419,7 +419,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
       const n = Number(c?.count ?? 0);
       if (n > 0) {
         a.textContent = 'Scopus: ' + fmt.format(n) + (n === 1 ? ' citation' : ' citations');
-        a.href = c.link || 'https://plu.mx/plum/a/?doi=' + doi;
+        a.href = 'https://plu.mx/plum/a/?doi=' + encodeURIComponent(doi); // free page, no Scopus sign-in
         a.hidden = false;
       }
       return n;
