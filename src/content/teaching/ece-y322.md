@@ -96,6 +96,9 @@ lectures:
   - n: 8
     title: "Ανισότητες και Οριακά Θεωρήματα"
     titleEn: "Inequalities and Limit Theorems"
+    file: "lecture-08.pdf"
+    exercises: "exercises-08.pdf"
+    summary: "summary-08.pdf"
   - n: 9
     title: "Δειγματοληψία και Δειγματοληπτικές Κατανομές"
     titleEn: "Sampling and Sampling Distributions"
