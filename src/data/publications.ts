@@ -119,7 +119,7 @@ export const books: Book[] = [
     title: 'Μηχανική Μάθηση με Python',
     titleEn: 'Machine Learning with Python',
     publisher: 'Εκδόσεις Παπαζήση',
-    url: 'https://papazissi.gr/el/products/michaniki-mathisi-me-python',
+    url: 'https://papazissi.gr/el/products/mixaniki-mathisi-me-python',
     isbn: '978-960-02-4712-1',
     eudoxus: '153585239',
   },
