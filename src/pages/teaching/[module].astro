@@ -59,6 +59,22 @@ const rows = [...d.lectures]
 const files = rows.reduce((n, r) => n + r.items.filter((i) => i.href).length, 0);
 const zip = archive(module.id);
 const kinds = KINDS.map((k) => ({ ...k, zip: archive(module.id, k.part) }));
+
+// Example exams, each with its paper and solutions, listed when the file exists.
+const link = (file?: string) => {
+  const size = file ? fileSize(module.id, file) : null;
+  return file && size !== null ? { href: `/teaching/${module.id}/${file}`, size } : null;
+};
+const exams = [...d.exams]
+  .sort((a, b) => a.n - b.n)
+  .map((e) => ({
+    n: e.n,
+    files: [
+      { el: 'Θέματα', en: 'Paper', ...link(e.paper) },
+      { el: 'Λύσεις', en: 'Solutions', ...link(e.solutions) },
+    ].filter((f) => 'href' in f && f.href) as { el: string; en: string; href: string; size: number }[],
+  }))
+  .filter((e) => e.files.length > 0);
 ---
 
 <BaseLayout
@@ -111,6 +127,14 @@ const kinds = KINDS.map((k) => ({ ...k, zip: archive(module.id, k.part) }));
     >
       <span data-lang="en" hidden>Material</span><span data-lang="el">Υλικό</span>
     </button>
+    {exams.length > 0 && (
+      <button
+        type="button" role="tab" id="tab-exams" aria-controls="panel-exams" aria-selected="false"
+        class="rounded-md border border-gray-300 px-4 py-2 text-sm font-medium text-gray-700 transition-colors hover:bg-gray-50 dark:border-gray-700 dark:text-gray-300 dark:hover:bg-gray-800"
+      >
+        <span data-lang="en" hidden>Exams</span><span data-lang="el">Εξετάσεις</span>
+      </button>
+    )}
   </div>
 
   <section id="panel-syllabus" role="tabpanel" aria-labelledby="tab-syllabus" class="mt-8 max-w-3xl">
@@ -232,6 +256,39 @@ const kinds = KINDS.map((k) => ({ ...k, zip: archive(module.id, k.part) }));
       </div>
     )}
   </section>
+
+  {exams.length > 0 && (
+    <section id="panel-exams" role="tabpanel" aria-labelledby="tab-exams" class="mt-8 max-w-3xl" hidden>
+      <p class="text-sm leading-relaxed text-gray-600 dark:text-gray-400">
+        <span data-lang="en" hidden>Example final exam papers, with their solutions.</span>
+        <span data-lang="el">Υποδείγματα τελικής εξέτασης, μαζί με τις λύσεις τους.</span>
+      </p>
+
+      <ol class="mt-8 divide-y divide-gray-100 border-t border-gray-200 dark:divide-gray-900 dark:border-gray-800">
+        {exams.map((e) => (
+          <li class="flex flex-wrap items-center gap-x-4 gap-y-2 py-3">
+            <span class="text-gray-900 dark:text-gray-100">
+              <span data-lang="en" hidden>Example exam {e.n}</span><span data-lang="el">Υπόδειγμα εξέτασης {e.n}</span>
+            </span>
+            <span class="flex flex-wrap gap-2">
+              {e.files.map((f) => (
+                <a
+                  href={f.href}
+                  target="_blank"
+                  rel="noopener"
+                  class="rounded-md border border-gray-300 px-2.5 py-1 text-sm text-gray-700 transition-colors hover:border-accent hover:text-accent dark:border-gray-700 dark:text-gray-300 dark:hover:border-accent-dark dark:hover:text-accent-dark"
+                >
+                  <svg class="inline-block align-[-4px]" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
+                  <span data-lang="en" hidden>{f.en}</span><span data-lang="el">{f.el}</span>
+                  <span class="text-xs text-gray-400 dark:text-gray-500">{formatBytes(f.size)}</span>
+                </a>
+              ))}
+            </span>
+          </li>
+        ))}
+      </ol>
+    </section>
+  )}
 </BaseLayout>
 
 <script>
@@ -279,5 +336,6 @@ const kinds = KINDS.map((k) => ({ ...k, zip: archive(module.id, k.part) }));
   }
 
   tabs.forEach((t) => t.addEventListener('click', () => selectTab(t.id.replace('tab-', ''))));
-  selectTab(location.hash === '#slides' ? 'slides' : 'syllabus');
+  const fromHash = location.hash.slice(1);
+  selectTab(tabs.some((t) => t.id === `tab-${fromHash}`) ? fromHash : 'syllabus');
 </script>

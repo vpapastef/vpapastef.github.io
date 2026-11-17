@@ -114,4 +114,8 @@ lectures:
   - n: 13
     title: "Γραμμική Παλινδρόμηση"
     titleEn: "Linear Regression"
+exams:
+  - n: 1
+    paper: "exams/example-exam-01.pdf"
+    solutions: "exams/example-exam-01-solutions.pdf"
 ---

@@ -80,6 +80,13 @@ const teaching = defineCollection({
       summary: z.string().optional(),
       week: z.number().optional(),
     })).default([]),
+    // Example exam papers: listed only when the file is in public/ (under exams/,
+    // so scripts/zip-lectures.sh leaves them out of the week zips).
+    exams: z.array(z.object({
+      n: z.number(),
+      paper: z.string(),
+      solutions: z.string().optional(),
+    })).default([]),
     draft: z.boolean().default(false),
   }),
 });
