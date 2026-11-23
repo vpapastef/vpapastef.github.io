@@ -102,6 +102,9 @@ lectures:
   - n: 9
     title: "Δειγματοληψία και Δειγματοληπτικές Κατανομές"
     titleEn: "Sampling and Sampling Distributions"
+    file: "lecture-09.pdf"
+    exercises: "exercises-09.pdf"
+    summary: "summary-09.pdf"
   - n: 10
     title: "Μέγιστη Πιθανοφάνεια"
     titleEn: "Maximum Likelihood"
